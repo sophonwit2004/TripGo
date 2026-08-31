@@ -1,0 +1,2120 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta extension on String { Future<void> operator >(other) async {}
+  }charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ศรีสะเกษสโลว์ไกด์ — เที่ยวช้า ๆ ในเมืองลำดวน</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --fb-blue: #1877F2;
+      --fb-blue-dark: #0F5FCC;
+      --bg: #F0F2F5;
+      --surface: #FFFFFF;
+      --text: #050505;
+      --text-muted: #65676B;
+      --border: #DADDE1;
+      --hover: #F2F2F2;
+      --green: #00A28A;
+      --rust: #E4573D;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans Thai', sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    input {
+      font-family: inherit;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ---------------- top nav ---------------- */
+    .topnav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--fb-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .brand-name {
+      font-weight: 700;
+      font-size: 19px;
+      color: var(--fb-blue);
+      display: none;
+    }
+
+    @media (min-width:560px) {
+      .brand-name {
+        display: block;
+      }
+    }
+
+    .nav-search {
+      flex: 1;
+      max-width: 520px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg);
+      border-radius: 999px;
+      padding: 9px 14px;
+    }
+
+    .nav-search svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .nav-search input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 14.5px;
+      width: 100%;
+      color: var(--text);
+    }
+
+    .nav-profile {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg);
+      border: none;
+      border-radius: 999px;
+      padding: 5px 12px 5px 5px;
+    }
+
+    .nav-profile .avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-profile span {
+      font-size: 13.5px;
+      font-weight: 600;
+      max-width: 110px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* ---------------- shell ---------------- */
+    .shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 20px 12px 60px;
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1fr) 280px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    @media (max-width:980px) {
+      .shell {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar-left,
+      .sidebar-right {
+        display: none;
+      }
+    }
+
+    .sidebar-left,
+    .sidebar-right {
+      position: sticky;
+      top: 76px;
+    }
+
+    .side-card {
+      background: var(--surface);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      padding: 8px;
+      margin-bottom: 16px;
+    }
+
+    .side-title {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      font-weight: 700;
+      padding: 8px 10px 4px;
+    }
+
+    .side-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 10px;
+      border-radius: 8px;
+      font-size: 14.5px;
+      font-weight: 500;
+      background: transparent;
+      border: none;
+      width: 100%;
+      text-align: left;
+      color: var(--text);
+    }
+
+    .side-item:hover {
+      background: var(--hover);
+    }
+
+    .side-item.active {
+      background: #E7F3FF;
+      color: var(--fb-blue);
+    }
+
+    .side-item svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .side-item.active svg {
+      stroke: var(--fb-blue);
+    }
+
+    .stat-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .stat-box h3 {
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      padding: 6px 0;
+      color: var(--text-muted);
+    }
+
+    .stat-row b {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .suggest-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+    }
+
+    .suggest-item .mini-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .suggest-item .mini-badge svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .suggest-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .suggest-info .n {
+      font-size: 13.5px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .suggest-info .p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .suggest-btn {
+      border: none;
+      background: #E7F3FF;
+      color: var(--fb-blue);
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .suggest-btn:hover {
+      background: #D5E9FE;
+    }
+
+    /* ---------------- profile prompt card ---------------- */
+    .name-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .name-card p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .name-card input {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 14px;
+      outline: none;
+      min-width: 160px;
+    }
+
+    .name-card input:focus {
+      border-color: var(--fb-blue);
+    }
+
+    /* ---------------- feed / posts ---------------- */
+    .feed {
+      min-width: 0;
+    }
+
+    .post {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+
+    .post-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px 10px;
+    }
+
+    .post-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .post-avatar svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .post-titles {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .post-titles .name {
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .post-titles .meta {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .post-titles .meta svg {
+      width: 11px;
+      height: 11px;
+      stroke: var(--text-muted);
+    }
+
+    .post-cover {
+      width: 100%;
+      height: 170px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .post-cover svg {
+      width: 56px;
+      height: 56px;
+      opacity: .9;
+    }
+
+    .post-cover .tagline {
+      position: absolute;
+      bottom: 10px;
+      left: 14px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      background: rgba(0, 0, 0, .28);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .post-body {
+      padding: 12px 16px 4px;
+      font-size: 14.5px;
+      color: var(--text);
+    }
+
+    .post-counts {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 16px 6px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .post-counts .likes {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .like-icon-mini {
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      background: var(--fb-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .like-icon-mini svg {
+      width: 10px;
+      height: 10px;
+      fill: #fff;
+      stroke: none;
+    }
+
+    .post-counts button {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .post-counts button:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .post-actions {
+      display: flex;
+      border-top: 1px solid var(--border);
+      margin: 8px 16px 0;
+      padding: 2px 0;
+    }
+
+    .action-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      background: none;
+      border: none;
+      padding: 9px 0;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .action-btn svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--text-muted);
+    }
+
+    .action-btn:hover {
+      background: var(--hover);
+    }
+
+    .action-btn.liked {
+      color: var(--fb-blue);
+    }
+
+    .action-btn.liked svg {
+      stroke: var(--fb-blue);
+      fill: var(--fb-blue);
+    }
+
+    .action-btn.checked {
+      color: var(--green);
+    }
+
+    .action-btn.checked svg {
+      stroke: var(--green);
+      fill: var(--green);
+    }
+
+    .comments-section {
+      padding: 8px 16px 16px;
+      display: none;
+    }
+
+    .comments-section.open {
+      display: block;
+    }
+
+    .comment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .comment-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .comment-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 12.5px;
+      font-weight: 700;
+    }
+
+    .comment-bubble {
+      background: var(--bg);
+      border-radius: 14px;
+      padding: 8px 12px;
+    }
+
+    .comment-bubble .cname {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .comment-bubble .ctext {
+      font-size: 13.5px;
+      margin-top: 1px;
+    }
+
+    .comment-time {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin: 3px 0 0 12px;
+    }
+
+    .comment-empty {
+      font-size: 13px;
+      color: var(--text-muted);
+      padding: 6px 2px 10px;
+    }
+
+    .comment-input-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .comment-input-row .comment-avatar {
+      width: 30px;
+      height: 30px;
+    }
+
+    .comment-input-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      background: var(--bg);
+      border-radius: 999px;
+      padding: 2px 4px 2px 14px;
+    }
+
+    .comment-input-wrap input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 13.5px;
+      padding: 8px 0;
+    }
+
+    .comment-send {
+      border: none;
+      background: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .comment-send svg {
+      width: 17px;
+      height: 17px;
+      stroke: var(--fb-blue);
+    }
+
+    .comment-send:hover {
+      background: #E7F3FF;
+    }
+
+    .empty-feed {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 50px 20px;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    .empty-feed b {
+      display: block;
+      color: var(--text);
+      font-size: 17px;
+      margin-bottom: 6px;
+    }
+
+    .note {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 8px 0 0;
+    }
+
+    /* ---------------- visual refresh ---------------- */
+    :root {
+      --bg: #f5f7fb;
+      --surface: rgba(255, 255, 255, .92);
+      --text: #182230;
+      --text-muted: #687386;
+      --border: #e7ebf2;
+      --hover: #eff6ff;
+      --fb-blue: #2563eb;
+      --fb-blue-dark: #1d4ed8;
+      --green: #0f9f82;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 8% 0%, rgba(96, 165, 250, .19), transparent 31rem),
+        radial-gradient(circle at 95% 16%, rgba(45, 212, 191, .15), transparent 26rem),
+        var(--bg);
+    }
+
+    .topnav {
+      height: 64px;
+      background: rgba(255, 255, 255, .82);
+      backdrop-filter: blur(16px);
+      border-bottom-color: rgba(218, 221, 225, .75);
+      box-shadow: 0 2px 18px rgba(15, 23, 42, .04);
+    }
+
+    .brand-mark {
+      background: linear-gradient(135deg, #2563eb, #38bdf8);
+      box-shadow: 0 7px 16px rgba(37, 99, 235, .28);
+    }
+
+    .brand-name {
+      letter-spacing: -.4px;
+    }
+
+    .nav-search {
+      max-width: 560px;
+      background: #f1f5f9;
+      border: 1px solid transparent;
+      transition: border-color .2s, background .2s, box-shadow .2s;
+    }
+
+    .nav-search:focus-within {
+      background: #fff;
+      border-color: #93c5fd;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, .10);
+    }
+
+    .nav-profile {
+      background: #f1f5f9;
+      transition: transform .2s, background .2s;
+    }
+
+    .nav-profile:hover {
+      transform: translateY(-1px);
+      background: #e8f1ff;
+    }
+
+    .shell {
+      max-width: 1240px;
+      padding-top: 28px;
+      gap: 24px;
+    }
+
+    .sidebar-left,
+    .sidebar-right {
+      top: 88px;
+    }
+
+    .side-card,
+    .stat-box,
+    .name-card,
+    .post,
+    .empty-feed {
+      border-color: rgba(226, 232, 240, .9);
+      box-shadow: 0 10px 28px rgba(15, 23, 42, .055);
+    }
+
+    .side-card {
+      padding: 10px;
+      border-radius: 14px;
+    }
+
+    .side-title {
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-size: 10.5px;
+    }
+
+    .side-item {
+      transition: background .18s, transform .18s, color .18s;
+    }
+
+    .side-item:hover {
+      background: #f1f5f9;
+      transform: translateX(2px);
+    }
+
+    .side-item.active {
+      background: linear-gradient(90deg, #dbeafe, #eff6ff);
+    }
+
+    .stat-box {
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .stat-box h3 {
+      font-size: 15.5px;
+    }
+
+    .stat-row {
+      border-bottom: 1px solid #f0f2f5;
+      padding: 9px 0;
+    }
+
+    .stat-row:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .stat-row b {
+      color: var(--fb-blue);
+      font-size: 16px;
+    }
+
+    .name-card {
+      border-radius: 16px;
+      background: linear-gradient(120deg, rgba(255, 255, 255, .98), rgba(239, 246, 255, .9));
+    }
+
+    .name-card input {
+      border-color: #dbe3ee;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .name-card input:focus {
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, .11);
+    }
+
+    .post {
+      border-radius: 16px;
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+
+    .post:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 34px rgba(15, 23, 42, .10);
+    }
+
+    .post-head {
+      padding: 17px 18px 12px;
+    }
+
+    .post-avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+    }
+
+    .post-cover {
+      height: 190px;
+      overflow: hidden;
+    }
+
+    .post-cover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 78% 20%, rgba(255, 255, 255, .33), transparent 28%),
+        linear-gradient(125deg, transparent 45%, rgba(0, 0, 0, .12));
+    }
+
+    .post-cover svg {
+      position: relative;
+      filter: drop-shadow(0 8px 8px rgba(0, 0, 0, .18));
+      transform: scale(1.12);
+    }
+
+    .post-cover .tagline {
+      background: rgba(15, 23, 42, .35);
+      backdrop-filter: blur(6px);
+    }
+
+    .post-body {
+      padding: 14px 18px 5px;
+    }
+
+    .post-actions {
+      margin: 8px 18px 0;
+    }
+
+    .action-btn {
+      transition: background .18s, color .18s, transform .18s;
+    }
+
+    .action-btn:hover {
+      background: #eff6ff;
+      transform: translateY(-1px);
+    }
+
+    .suggest-btn {
+      background: #e0edff;
+      color: #1d4ed8;
+      transition: transform .18s, background .18s;
+    }
+
+    .suggest-btn:hover {
+      background: #bfdbfe;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width:560px) {
+      .topnav {
+        padding: 0 12px;
+      }
+
+      .shell {
+        padding: 16px 10px 40px;
+      }
+
+      .post-cover {
+        height: 165px;
+      }
+
+      .name-card {
+        padding: 13px;
+      }
+    }
+
+    /* ---------------- premium travel dashboard ---------------- */
+    body {
+      background: #07111f;
+      color: #e8f0ff;
+      isolation: isolate;
+    }
+
+    body::before,
+    body::after {
+      content: '';
+      position: fixed;
+      z-index: -1;
+      border-radius: 999px;
+      pointer-events: none;
+      filter: blur(1px);
+      opacity: .62;
+    }
+
+    body::before {
+      width: 48rem;
+      height: 48rem;
+      top: -25rem;
+      left: -15rem;
+      background: radial-gradient(circle, rgba(14, 165, 233, .31), rgba(37, 99, 235, .08) 38%, transparent 68%);
+      animation: auroraFloat 15s ease-in-out infinite alternate;
+    }
+
+    body::after {
+      width: 42rem;
+      height: 42rem;
+      right: -21rem;
+      top: 20rem;
+      background: radial-gradient(circle, rgba(16, 185, 129, .20), rgba(45, 212, 191, .06) 42%, transparent 68%);
+      animation: auroraFloat 19s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes auroraFloat {
+      from {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+
+      to {
+        transform: translate3d(5rem, 2rem, 0) scale(1.12);
+      }
+    }
+
+    .topnav {
+      background: rgba(7, 17, 31, .72);
+      border-bottom: 1px solid rgba(148, 163, 184, .16);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, .17);
+    }
+
+    .brand-name {
+      color: #f8fbff;
+    }
+
+    .brand-mark {
+      background: linear-gradient(135deg, #38bdf8 0%, #6366f1 48%, #a855f7 100%);
+      border: 1px solid rgba(255, 255, 255, .25);
+    }
+
+    .nav-search {
+      background: rgba(148, 163, 184, .12);
+      border-color: rgba(148, 163, 184, .13);
+    }
+
+    .nav-search input,
+    .nav-search input::placeholder {
+      color: #dbeafe;
+    }
+
+    .nav-search svg {
+      stroke: #8ba5c7;
+    }
+
+    .nav-search:focus-within {
+      background: rgba(15, 23, 42, .86);
+      border-color: rgba(56, 189, 248, .7);
+      box-shadow: 0 0 0 4px rgba(14, 165, 233, .12), 0 0 28px rgba(14, 165, 233, .13);
+    }
+
+    .nav-profile {
+      background: rgba(148, 163, 184, .12);
+      color: #f1f5f9;
+    }
+
+    .nav-profile:hover {
+      background: rgba(56, 189, 248, .16);
+    }
+
+    .shell {
+      grid-template-columns: 228px minmax(0, 1fr) 272px;
+    }
+
+    .side-card,
+    .stat-box,
+    .name-card,
+    .post,
+    .empty-feed {
+      background: linear-gradient(145deg, rgba(20, 35, 57, .83), rgba(10, 22, 39, .74));
+      border: 1px solid rgba(148, 163, 184, .16);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, .20), inset 0 1px 0 rgba(255, 255, 255, .045);
+      backdrop-filter: blur(18px);
+    }
+
+    .side-title {
+      color: #7dd3fc;
+    }
+
+    .side-item {
+      color: #b9c9de;
+    }
+
+    .side-item:hover {
+      color: #f8fbff;
+      background: rgba(148, 163, 184, .11);
+    }
+
+    .side-item.active {
+      color: #fff;
+      background: linear-gradient(90deg, rgba(14, 165, 233, .26), rgba(99, 102, 241, .16));
+      box-shadow: inset 3px 0 0 #38bdf8;
+    }
+
+    .side-item.active svg {
+      stroke: #7dd3fc;
+    }
+
+    .stat-box h3 {
+      color: #f1f5f9;
+    }
+
+    .stat-row {
+      color: #9fb1c7;
+      border-bottom-color: rgba(148, 163, 184, .10);
+    }
+
+    #statProvinceRow {
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      padding: 6px 8px;
+      margin: 0 -8px;
+      border-radius: 6px;
+    }
+
+    #statProvinceRow:hover {
+      background: rgba(56, 189, 248, 0.12);
+      color: #fff;
+    }
+
+    .stat-row b {
+      color: #dff7ff;
+      font-variant-numeric: tabular-nums;
+      text-shadow: 0 0 16px rgba(56, 189, 248, .4);
+    }
+
+    .name-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 102px;
+      background: linear-gradient(125deg, rgba(30, 64, 175, .62), rgba(14, 116, 144, .47) 52%, rgba(15, 118, 110, .4));
+      border-color: rgba(125, 211, 252, .26);
+    }
+
+    .name-card::after {
+      content: '';
+      position: absolute;
+      width: 230px;
+      height: 230px;
+      right: -90px;
+      top: -125px;
+      border: 1px solid rgba(255, 255, 255, .19);
+      border-radius: 50%;
+      box-shadow: 0 0 0 28px rgba(255, 255, 255, .045), 0 0 0 62px rgba(255, 255, 255, .025);
+    }
+
+    .name-card p {
+      color: #e0f2fe;
+      font-weight: 500;
+      position: relative;
+      z-index: 1;
+    }
+
+    .name-card input {
+      position: relative;
+      z-index: 1;
+      background: rgba(3, 15, 29, .42);
+      color: #fff;
+      border-color: rgba(186, 230, 253, .35);
+      border-radius: 10px;
+    }
+
+    .name-card input::placeholder {
+      color: #b9d8e9;
+    }
+
+    .name-card input:focus {
+      border-color: #7dd3fc;
+      background: rgba(3, 15, 29, .62);
+    }
+
+    .post {
+      overflow: hidden;
+    }
+
+    .post::before {
+      content: '';
+      height: 2px;
+      display: block;
+      background: linear-gradient(90deg, #22d3ee, #818cf8 50%, #34d399);
+      opacity: .8;
+    }
+
+    .post:hover {
+      box-shadow: 0 24px 55px rgba(0, 0, 0, .31), 0 0 0 1px rgba(125, 211, 252, .11);
+    }
+
+    .post-head {
+      background: linear-gradient(90deg, rgba(255, 255, 255, .025), transparent);
+    }
+
+    .post-titles .name,
+    .post-body {
+      color: #f0f7ff;
+    }
+
+    .post-titles .meta,
+    .post-counts,
+    .note {
+      color: #9db0c8;
+    }
+
+    .post-titles .meta svg {
+      stroke: #75c9ed;
+    }
+
+    .post-cover {
+      height: 212px;
+    }
+
+    .post-cover::after {
+      content: 'EXPLORE THAILAND';
+      position: absolute;
+      top: 13px;
+      right: 15px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .15em;
+      color: rgba(255, 255, 255, .78);
+    }
+
+    .post-cover .tagline {
+      border: 1px solid rgba(255, 255, 255, .20);
+    }
+
+    .post-actions {
+      border-top-color: rgba(148, 163, 184, .13);
+    }
+
+    .action-btn {
+      color: #9db0c8;
+    }
+
+    .action-btn svg {
+      stroke: #9db0c8;
+    }
+
+    .action-btn:hover {
+      color: #e0f2fe;
+      background: rgba(56, 189, 248, .11);
+    }
+
+    .comments-section {
+      background: rgba(2, 12, 25, .22);
+    }
+
+    .comment-bubble {
+      background: rgba(148, 163, 184, .13);
+      color: #eef7ff;
+    }
+
+    .comment-time,
+    .comment-empty {
+      color: #9db0c8;
+    }
+
+    .comment-input-wrap {
+      background: rgba(148, 163, 184, .12);
+    }
+
+    .comment-input-wrap input {
+      color: #f8fafc;
+    }
+
+    .comment-input-wrap input::placeholder {
+      color: #8fa4bd;
+    }
+
+    .suggest-info .n {
+      color: #eaf4ff;
+    }
+
+    .suggest-info .p {
+      color: #91a7c1;
+    }
+
+    .suggest-btn {
+      background: rgba(14, 165, 233, .16);
+      color: #7dd3fc;
+    }
+
+    .suggest-btn:hover {
+      background: rgba(14, 165, 233, .28);
+    }
+
+    .empty-feed {
+      color: #b4c3d6;
+    }
+
+    .empty-feed b {
+      color: #fff;
+    }
+
+    @media (max-width:980px) {
+      body::after {
+        right: -28rem;
+      }
+    }
+
+    /* place history dialog */
+    .post[data-place] {
+      cursor: pointer;
+    }
+
+    .place-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      place-items: center;
+      padding: 20px;
+    }
+
+    .place-modal.open {
+      display: grid;
+    }
+
+    .place-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(2, 8, 23, .74);
+      backdrop-filter: blur(10px);
+    }
+
+    .place-dialog {
+      position: relative;
+      width: min(680px, 100%);
+      max-height: min(760px, calc(100vh - 40px));
+      overflow: auto;
+      border: 1px solid rgba(125, 211, 252, .25);
+      border-radius: 22px;
+      background: linear-gradient(145deg, rgba(20, 38, 63, .98), rgba(6, 17, 32, .98));
+      box-shadow: 0 30px 90px rgba(0, 0, 0, .55), 0 0 55px rgba(14, 165, 233, .12);
+      animation: dialogIn .24s ease-out;
+    }
+
+    @keyframes dialogIn {
+      from {
+        opacity: 0;
+        transform: translateY(14px) scale(.97);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .dialog-hero {
+      min-height: 170px;
+      padding: 28px;
+      display: flex;
+      align-items: flex-end;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dialog-hero::before {
+      content: '';
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border: 1px solid rgba(255, 255, 255, .22);
+      border-radius: 50%;
+      right: -75px;
+      top: -120px;
+      box-shadow: 0 0 0 35px rgba(255, 255, 255, .05);
+    }
+
+    .dialog-hero svg {
+      width: 72px;
+      height: 72px;
+      margin-right: 16px;
+      filter: drop-shadow(0 8px 10px rgba(0, 0, 0, .2));
+    }
+
+    .dialog-eyebrow {
+      color: rgba(255, 255, 255, .75);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .dialog-title {
+      color: white;
+      font-size: clamp(23px, 4vw, 31px);
+      line-height: 1.16;
+      letter-spacing: -.5px;
+      margin-top: 5px;
+    }
+
+    .dialog-close {
+      position: absolute;
+      z-index: 1;
+      top: 14px;
+      right: 14px;
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(255, 255, 255, .25);
+      border-radius: 50%;
+      background: rgba(2, 12, 25, .27);
+      color: #fff;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .dialog-close:hover {
+      background: rgba(255, 255, 255, .18);
+    }
+
+    .dialog-content {
+      padding: 24px 28px 30px;
+    }
+
+    .history-label {
+      color: #7dd3fc;
+      font-size: 11px;
+      letter-spacing: .13em;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .history-copy {
+      color: #d8e7f5;
+      font-size: 15px;
+      line-height: 1.75;
+      margin: 9px 0 22px;
+    }
+
+    .history-facts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .history-fact {
+      padding: 13px;
+      border: 1px solid rgba(148, 163, 184, .14);
+      border-radius: 12px;
+      background: rgba(148, 163, 184, .08);
+    }
+
+    .history-fact span {
+      display: block;
+      color: #8fa4bd;
+      font-size: 11px;
+      margin-bottom: 4px;
+    }
+
+    .history-fact b {
+      display: block;
+      color: #f2f8ff;
+      font-size: 13px;
+    }
+
+    .history-tip {
+      margin-top: 18px;
+      padding: 13px 15px;
+      border-left: 3px solid #38bdf8;
+      background: rgba(14, 165, 233, .09);
+      border-radius: 0 10px 10px 0;
+      color: #cfe7f6;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .maps-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 18px;
+      padding: 12px 15px;
+      border-radius: 11px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      background: linear-gradient(100deg, #2563eb, #0ea5e9);
+      box-shadow: 0 10px 22px rgba(14, 165, 233, .20);
+      transition: transform .18s, box-shadow .18s;
+    }
+
+    .maps-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(14, 165, 233, .31);
+    }
+
+    .maps-link svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    @media (max-width:560px) {
+      .dialog-content {
+        padding: 20px;
+      }
+
+      .dialog-hero {
+        min-height: 145px;
+        padding: 22px;
+      }
+
+      .history-facts {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="topnav">
+    <div class="brand">
+      <div class="brand-mark">ร</div>
+      <div class="brand-name">ศรีสะเกษสโลว์ไกด์</div>
+    </div>
+    <div class="nav-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+        <circle cx="11" cy="11" r="7" />
+        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </svg>
+      <input id="searchInput" type="text" placeholder="ค้นหาสถานที่หรือจังหวัด">
+    </div>
+    <button class="nav-profile" id="navProfile">
+      <div class="avatar" id="navAvatar">น</div>
+      <span id="navName">ผู้เยี่ยมชม</span>
+    </button>
+  </nav>
+
+  <div class="shell">
+
+    <aside class="sidebar-left">
+      <div class="side-card" id="statusMenu"></div>
+    </aside>
+
+    <main class="feed">
+      <div class="name-card">
+        <p>ชื่อที่แสดงตอนคุณคอมเมนต์ (คอมเมนต์และไลก์มองเห็นได้โดยผู้ใช้ทุกคน)</p>
+        <input id="nameInput" type="text" placeholder="ตั้งชื่อของคุณ">
+      </div>
+      <div id="postsList"></div>
+      <div class="empty-feed" id="emptyState" style="display:none;">
+        <b>ไม่พบสถานที่ที่ตรงกับตัวกรอง</b>
+        ลองเปลี่ยนคำค้นหาหรือมุมมองอื่นดู
+      </div>
+    </main>
+
+    <aside class="sidebar-right">
+      <div class="stat-box">
+        <h3>สรุปการเดินทางของคุณ</h3>
+        <div class="stat-row"><span>สถานที่ทั้งหมด</span><b id="statTotal">0</b></div>
+        <div class="stat-row"><span>เช็คอินแล้ว</span><b id="statChecked">0</b></div>
+        <div class="stat-row" id="statProvinceRow" title="คลิกเพื่อดูรายชื่อจังหวัดที่คุณเคยไป">
+          <span>จังหวัดที่ไปมาแล้ว</span>
+          <b id="statProvince">0</b>
+        </div>
+      </div>
+      <div class="stat-box">
+        <h3>ยังไม่เคยไป ลองดูสักที่</h3>
+        <div id="suggestList"></div>
+      </div>
+    </aside>
+
+  </div>
+
+  <div class="place-modal" id="placeModal" aria-hidden="true">
+    <div class="place-modal-backdrop" data-close-place></div>
+    <section class="place-dialog" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
+      <button class="dialog-close" type="button" aria-label="ปิด" data-close-place>×</button>
+      <div class="dialog-hero" id="dialogHero"></div>
+      <div class="dialog-content" id="dialogContent"></div>
+    </section>
+  </div>
+
+  <script>
+    const places = [
+      {
+        id: 'srikam', name: 'ปราสาทสระกำแพงใหญ่', province: 'ศรีสะเกษ', category: 'ประวัติศาสตร์',
+        desc: 'ปราสาทหินขอมกลางเมือง เงียบสงบและคนไม่พลุกพล่านเท่าปราสาทหินชื่อดังแห่งอื่น'
+      },
+      {
+        id: 'phanomrung', name: 'ปราสาทหินพนมรุ้ง', province: 'บุรีรัมย์', category: 'ประวัติศาสตร์',
+        desc: 'ปราสาทหินบนยอดภูเขาไฟดับ ช่วงที่แสงอาทิตย์ส่องตรงประตูทั้ง 15 บานคือวันที่คนแน่นที่สุด'
+      },
+      {
+        id: 'khaophrawihan', name: 'อุทยานแห่งชาติเขาพระวิหาร', province: 'ศรีสะเกษ', category: 'ธรรมชาติ',
+        desc: 'ยืนบนหน้าผาสูงแล้วมองเห็นที่ราบกัมพูชาทอดยาวสุดลูกหูลูกตา'
+      },
+      {
+        id: 'doisuthep', name: 'วัดพระธาตุดอยสุเทพ', province: 'เชียงใหม่', category: 'วัด',
+        desc: 'วัดบนดอยที่มองเห็นตัวเมืองเชียงใหม่ทั้งเมือง ต้องเดินขึ้นบันไดนาคหลายร้อยขั้น'
+      },
+      {
+        id: 'rongkhun', name: 'วัดร่องขุ่น', province: 'เชียงราย', category: 'วัด',
+        desc: 'วัดสีขาวที่ทุกรายละเอียดแกะสลักด้วยมือ ออกแบบโดยอาจารย์เฉลิมชัย โฆษิตพิพัฒน์'
+      },
+      {
+        id: 'khaoyai', name: 'เขาใหญ่', province: 'นครราชสีมา', category: 'ธรรมชาติ',
+        desc: 'ผืนป่ามรดกโลกที่มีทั้งช้างป่า น้ำตก และอากาศเย็นสบายเกือบตลอดทั้งปี'
+      },
+      {
+        id: 'phiphi', name: 'เกาะพีพี', province: 'กระบี่', category: 'ทะเล',
+        desc: 'หมู่เกาะน้ำใสสีเทอร์ควอยซ์ที่แทบทุกมุมกลายเป็นจุดถ่ายรูปได้'
+      },
+      {
+        id: 'maya', name: 'อ่าวมาหยา', province: 'กระบี่', category: 'ทะเล',
+        desc: 'อ่าวเล็กที่ล้อมรอบด้วยหน้าผาหินปูนสูงชัน โด่งดังไปทั่วโลกจากภาพยนตร์ฮอลลีวูด'
+      },
+      {
+        id: 'damnoen', name: 'ตลาดน้ำดำเนินสะดวก', province: 'ราชบุรี', category: 'ตลาด',
+        desc: 'ตลาดน้ำเก่าแก่ที่พ่อค้าแม่ค้ายังพายเรือขายของสดและของกินกลางคลอง'
+      },
+      {
+        id: 'samchuk', name: 'ตลาดร้อยปีสามชุก', province: 'สุพรรณบุรี', category: 'ตลาด',
+        desc: 'ชุมชนเก่าริมแม่น้ำท่าจีน เก็บอาคารไม้สมัยรัชกาลที่ 5 ไว้เกือบครบทั้งตลาด'
+      },
+      {
+        id: 'srinakarin', name: 'เขื่อนศรีนครินทร์', province: 'กาญจนบุรี', category: 'ธรรมชาติ',
+        desc: 'อ่างเก็บน้ำขนาดใหญ่ล้อมด้วยภูเขา นิยมล่องแพไม้ไผ่พักค้างคืนกลางน้ำ'
+      },
+      {
+        id: 'kwai', name: 'สะพานข้ามแม่น้ำแคว', province: 'กาญจนบุรี', category: 'ประวัติศาสตร์',
+        desc: 'สะพานประวัติศาสตร์จากยุคสงครามโลกครั้งที่สอง เดินข้ามได้จริงระหว่างขบวนรถไฟ'
+      },
+      {
+        id: 'sukhothai', name: 'อุทยานประวัติศาสตร์สุโขทัย', province: 'สุโขทัย', category: 'ประวัติศาสตร์',
+        desc: 'เมืองเก่าราชธานีแห่งแรกของไทย ปั่นจักรยานชมซากโบราณสถานได้เกือบทั้งวัน'
+      },
+      {
+        id: 'inthanon', name: 'ดอยอินทนนท์', province: 'เชียงใหม่', category: 'ธรรมชาติ',
+        desc: 'ยอดเขาสูงสุดของประเทศไทย อากาศหนาวเย็นได้ตลอดทั้งปีแม้ในหน้าร้อน'
+      },
+      {
+        id: 'railay', name: 'หาดไร่เลย์', province: 'กระบี่', category: 'ทะเล',
+        desc: 'หาดที่เข้าถึงได้ทางเรือเท่านั้น ล้อมรอบด้วยหน้าผาปีนเขาที่มีชื่อเสียงระดับโลก'
+      },
+      {
+        id: 'watnonkaed', name: 'วัดโนนแกด (วัดศรีธาตุ)', province: 'ศรีสะเกษ', category: 'วัด',
+        desc: 'วัดร่มรื่นริมเส้นทางศรีสะเกษ–กันทรลักษ์ มีพระธาตุบ้านโนนแกดและสรีระสังขารหลวงปู่เกลี้ยงให้สักการะ'
+      },
+      {
+        id: 'phrathatreungrong', name: 'พระธาตุเรืองรอง', province: 'ศรีสะเกษ', category: 'วัด',
+        desc: 'ศาสนสถานศิลปะพื้นบ้านอีสานใต้ สูง 6 ชั้น พร้อมพิพิธภัณฑ์และจุดชมทัศนียภาพเมืองศรีสะเกษ'
+      },
+      {
+        id: 'watphratatsuphanhong', name: 'วัดพระธาตุสุพรรณหงส์', province: 'ศรีสะเกษ', category: 'วัด',
+        desc: 'โดดเด่นด้วยพระอุโบสถทรงเรือสุพรรณหงส์จำลองกลางน้ำ และบันไดพญานาคสีเขียว'
+      },
+      {
+        id: 'ryurarin', name: 'ริวระริน คาเฟ่', province: 'ศรีสะเกษ', category: 'คาเฟ่',
+        desc: 'คาเฟ่สวนบรรยากาศร่มรื่น มีลำธาร น้ำตกจำลอง บ่อปลาคาร์ป และมุมถ่ายรูปหลากหลาย'
+      },
+      {
+        id: 'caffeinehouse', name: 'Caffeine House & Roaster', province: 'ศรีสะเกษ', category: 'คาเฟ่',
+        desc: 'คาเฟ่บรรยากาศอบอุ่นสำหรับพักจิบกาแฟ มีทั้งมุมในร้านและพื้นที่สีเขียวด้านนอก'
+      },
+      {
+        id: 'lanaodlod', name: 'สวนสาธารณะลานออดหลอด', province: 'ศรีสะเกษ', category: 'พักผ่อนหย่อนใจ',
+        desc: 'พื้นที่พักผ่อนริมห้วยสำราญ ใกล้สะพานขาว มีสวนหย่อม จุดนั่งเล่น และเครื่องออกกำลังกาย'
+      },
+      {
+        id: 'suansomdet', name: 'สวนสมเด็จพระศรีนครินทร์ ศรีสะเกษ', province: 'ศรีสะเกษ', category: 'พักผ่อนหย่อนใจ',
+        desc: 'สวนสาธารณะสำหรับเดินเล่นและพักผ่อน โดดเด่นด้วยต้นลำดวนจำนวนมากและเทศกาลดอกลำดวนบาน'
+      },
+      {
+        id: 'huainamkham', name: 'เกาะกลางน้ำห้วยน้ำคำ', province: 'ศรีสะเกษ', category: 'พักผ่อนหย่อนใจ',
+        desc: 'สวนสาธารณะกลางอ่างเก็บน้ำ เหมาะกับการเดิน วิ่ง ปั่นจักรยาน และชมบรรยากาศเมืองยามเย็น'
+      },
+    ];
+
+    const placeHistories = {
+      srikam: 'ปราสาทหินขอมแห่งนี้สร้างขึ้นราวพุทธศตวรรษที่ 16–17 เป็นศาสนสถานสำคัญของชุมชนโบราณในแถบอีสานใต้ ก่อนพัฒนาเป็นเมืองในเวลาต่อมา',
+      phanomrung: 'ศาสนสถานบนยอดภูเขาไฟดับ สร้างขึ้นเพื่อถวายแด่พระศิวะในราวพุทธศตวรรษที่ 15–18 และมีแนวแกนสถาปัตยกรรมที่รับแสงอาทิตย์ได้อย่างน่าทึ่ง',
+      khaophrawihan: 'ผืนป่าบนเทือกเขาพนมดงรักที่มีทั้งหน้าผาและร่องรอยอารยธรรมเขมรโบราณ พื้นที่นี้เป็นจุดชมวิวสำคัญของภาคตะวันออกเฉียงเหนือ',
+      doisuthep: 'วัดบนดอยแห่งนี้เป็นศูนย์รวมศรัทธาของชาวเชียงใหม่ สร้างขึ้นในสมัยพระเจ้ากือนา และเชื่อมโยงกับตำนานช้างมงคลผู้เลือกสถานที่ประดิษฐานพระบรมสารีริกธาตุ',
+      rongkhun: 'วัดร่องขุ่นในรูปแบบปัจจุบันเริ่มสร้างขึ้นเมื่อ พ.ศ. 2540 จากวิสัยทัศน์ของอาจารย์เฉลิมชัย โฆษิตพิพัฒน์ เพื่อเป็นงานศิลปะร่วมสมัยที่เล่าเรื่องพุทธศิลป์',
+      khaoyai: 'อุทยานแห่งชาติเขาใหญ่ก่อตั้งเมื่อ พ.ศ. 2505 เป็นอุทยานแห่งชาติแห่งแรกของไทย และเป็นส่วนหนึ่งของผืนป่าดงพญาเย็น–เขาใหญ่ มรดกโลกทางธรรมชาติ',
+      phiphi: 'หมู่เกาะกลางทะเลอันดามันมีชุมชนชาวเลและเส้นทางค้าขายมาช้านาน ก่อนกลายเป็นจุดหมายระดับโลกจากภูมิทัศน์หน้าผาหินปูนและทะเลสีใส',
+      maya: 'อ่าวเล็กกลางเกาะพีพีเล โอบล้อมด้วยหน้าผาหินปูนสูงชัน ชื่อเสียงระดับนานาชาติเพิ่มขึ้นจากการเป็นสถานที่ถ่ายทำภาพยนตร์ และต่อมามีการฟื้นฟูระบบนิเวศอย่างจริงจัง',
+      damnoen: 'คลองดำเนินสะดวกขุดขึ้นในสมัยรัชกาลที่ 4 เพื่อเชื่อมแม่น้ำแม่กลองและแม่น้ำท่าจีน ก่อนจะเติบโตเป็นศูนย์กลางการค้าทางน้ำของชุมชน',
+      samchuk: 'ตลาดริมแม่น้ำท่าจีนแห่งนี้เติบโตขึ้นในยุครัชกาลที่ 5 และยังคงอาคารไม้ ร้านค้า และวิถีชุมชนไว้ จนได้รับรางวัลอนุรักษ์มรดกทางวัฒนธรรม',
+      srinakarin: 'เขื่อนศรีนครินทร์สร้างกั้นแม่น้ำแควใหญ่เพื่อผลิตไฟฟ้าและบริหารจัดการน้ำ กลายเป็นภูมิทัศน์ทะเลสาบขนาดใหญ่ท่ามกลางป่าเขากาญจนบุรี',
+      kwai: 'สะพานสายนี้เป็นส่วนหนึ่งของเส้นทางรถไฟสายมรณะในช่วงสงครามโลกครั้งที่ 2 เป็นอนุสรณ์สำคัญที่บอกเล่าประวัติศาสตร์แรงงานเชลยศึกและภูมิภาคเอเชียตะวันออกเฉียงใต้',
+      sukhothai: 'อดีตราชธานีสำคัญในคริสต์ศตวรรษที่ 13–14 ที่มีบทบาทต่อศิลปะ ภาษา และการปกครองของไทย ปัจจุบันโบราณสถานได้รับการขึ้นทะเบียนเป็นมรดกโลก',
+      inthanon: 'ดอยอินทนนท์เคยมีชื่อว่า ดอยหลวง และได้รับการตั้งชื่อใหม่เพื่อเป็นเกียรติแก่พระเจ้าอินทวิชยานนท์ ผู้ตระหนักถึงคุณค่าของผืนป่าและต้นน้ำ',
+      railay: 'ไร่เลย์เป็นคาบสมุทรที่ไม่มีถนนเชื่อมจากฝั่ง จึงเข้าถึงทางเรือเป็นหลัก ธรณีสัณฐานหินปูนอันโดดเด่นทำให้เป็นจุดหมายของนักปีนผาจากทั่วโลก',
+      watnonkaed: 'วัดโนนแกด หรือวัดศรีธาตุ เป็นวัดสำคัญของจังหวัดศรีสะเกษ เชื่อมโยงกับหลวงปู่เกลี้ยง เตชธัมโม และมีพระธาตุบ้านโนนแกดเป็นศูนย์รวมศรัทธา',
+      phrathatreungrong: 'พระธาตุเรืองรองสร้างขึ้นเมื่อ พ.ศ. 2525 เพื่อประดิษฐานพระบรมสารีริกธาตุ ผสานศิลปวัฒนธรรม 4 ชนเผ่า คือ ลาว ส่วย เขมร และเยอ',
+      watphratatsuphanhong: 'วัดพระธาตุสุพรรณหงส์มีอุโบสถทรงเรือสุพรรณหงส์จำลองตั้งอยู่กลางน้ำ เป็นงานสถาปัตยกรรมร่วมสมัยที่โดดเด่นของศรีสะเกษ',
+      ryurarin: 'ริวระริน คาเฟ่เป็นคาเฟ่สไตล์สวนที่ออกแบบให้มีน้ำตก ลำธาร บ่อปลาคาร์ป และพื้นที่สีเขียวสำหรับการพักผ่อน',
+      caffeinehouse: 'คาเฟ่ขนาดอบอุ่นในเมืองศรีสะเกษ เหมาะสำหรับแวะพักระหว่างวันและเพลิดเพลินกับกาแฟหรือเบเกอรี่',
+      lanaodlod: 'ลานออดหลอดเปิดเป็นสวนสาธารณะในปี 2565 เพื่อเป็นอนุสรณ์ 238 ปี จังหวัดศรีสะเกษ และเป็นพื้นที่กิจกรรมของชุมชนริมห้วยสำราญ',
+      suansomdet: 'สวนสมเด็จพระศรีนครินทร์ ศรีสะเกษ เป็นพื้นที่สีเขียวสำคัญของเมือง มีต้นลำดวนจำนวนมากและเป็นสถานที่จัดเทศกาลดอกลำดวนบาน',
+      huainamkham: 'เกาะกลางน้ำห้วยน้ำคำได้รับการพัฒนาเป็นสวนสาธารณะกลางเมือง มีทางเดินและลู่วิ่งรอบเกาะสำหรับชาวศรีสะเกษและผู้มาเยือน'
+    };
+
+    // One notable destination for every Thai province. Existing entries take priority.
+    const nationalHighlights = [
+      ['grandpalace', 'พระบรมมหาราชวัง', 'กรุงเทพมหานคร', 'ประวัติศาสตร์', 'พระราชวังและกลุ่มสถาปัตยกรรมสำคัญใจกลางกรุงเทพฯ'],
+      ['ayutthayahistorical', 'อุทยานประวัติศาสตร์พระนครศรีอยุธยา', 'พระนครศรีอยุธยา', 'ประวัติศาสตร์', 'โบราณสถานราชธานีเก่าที่ได้รับการขึ้นทะเบียนเป็นมรดกโลก'],
+      ['watthamsaengphet', 'วัดถ้ำแสงเพชร', 'อำนาจเจริญ', 'วัด', 'วัดบนเนินหินที่มีถ้ำและจุดชมวิวอันเงียบสงบ'],
+      ['watmuang', 'วัดม่วง', 'อ่างทอง', 'วัด', 'วัดที่มีพระพุทธรูปองค์ใหญ่โดดเด่นกลางทุ่งนา'],
+      ['phutok', 'ภูทอก', 'บึงกาฬ', 'ธรรมชาติ', 'ภูเขาหินทรายพร้อมสะพานไม้และวิวผืนป่า'],
+      ['watluangsothon', 'วัดโสธรวรารามวรวิหาร', 'ฉะเชิงเทรา', 'วัด', 'วัดคู่เมืองริมแม่น้ำบางปะกง'],
+      ['chainatbirdpark', 'สวนนกชัยนาท', 'ชัยนาท', 'พักผ่อนหย่อนใจ', 'แหล่งเรียนรู้และสวนพักผ่อนที่มีกรงนกขนาดใหญ่'],
+      ['pahinngam', 'อุทยานแห่งชาติป่าหินงาม', 'ชัยภูมิ', 'ธรรมชาติ', 'ทุ่งดอกกระเจียวและลานหินรูปร่างแปลกตา'],
+      ['chanthaburicathedral', 'อาสนวิหารพระนางมารีอาปฏิสนธินิรมล', 'จันทบุรี', 'ประวัติศาสตร์', 'อาสนวิหารคาทอลิกเก่าแก่ริมแม่น้ำจันทบุรี'],
+      ['pattaya', 'พัทยา', 'ชลบุรี', 'ทะเล', 'เมืองชายทะเลที่มีชายหาด กิจกรรม และคาเฟ่มากมาย'],
+      ['mukochumphon', 'อุทยานแห่งชาติหมู่เกาะชุมพร', 'ชุมพร', 'ทะเล', 'หมู่เกาะและแนวปะการังของอ่าวไทยตอนบน'],
+      ['sirindhornmuseum', 'พิพิธภัณฑ์สิรินธร', 'กาฬสินธุ์', 'ประวัติศาสตร์', 'พิพิธภัณฑ์ไดโนเสาร์และแหล่งขุดค้นภูกุ้มข้าว'],
+      ['kamphaengphethistorical', 'อุทยานประวัติศาสตร์กำแพงเพชร', 'กำแพงเพชร', 'ประวัติศาสตร์', 'โบราณสถานเมืองเก่ารายล้อมด้วยกำแพงและคูเมือง'],
+      ['phuwiang', 'อุทยานแห่งชาติภูเวียง', 'ขอนแก่น', 'ธรรมชาติ', 'แหล่งรอยเท้าและซากดึกดำบรรพ์ไดโนเสาร์'],
+      ['watphrathatlampangluang', 'วัดพระธาตุลำปางหลวง', 'ลำปาง', 'วัด', 'วัดล้านนาเก่าแก่ที่มีเจดีย์ประธานอันงดงาม'],
+      ['watphrathathariphunchai', 'วัดพระธาตุหริภุญชัย', 'ลำพูน', 'วัด', 'พระธาตุคู่เมืองลำพูนในเขตเมืองโบราณหริภุญชัย'],
+      ['chiangkhan', 'เชียงคาน', 'เลย', 'พักผ่อนหย่อนใจ', 'เมืองริมโขงที่มีบ้านไม้เก่า คาเฟ่ และบรรยากาศสโลว์ไลฟ์'],
+      ['phraprangsamyot', 'พระปรางค์สามยอด', 'ลพบุรี', 'ประวัติศาสตร์', 'ปรางค์ขอมเก่าแก่และแลนด์มาร์กลิงเมืองลพบุรี'],
+      ['pangun', 'ปางอุ๋ง', 'แม่ฮ่องสอน', 'ธรรมชาติ', 'อ่างเก็บน้ำท่ามกลางป่าสนและสายหมอกยามเช้า'],
+      ['phrathatnadun', 'พระธาตุนาดูน', 'มหาสารคาม', 'วัด', 'พุทธมณฑลอีสานและพระธาตุสำคัญของจังหวัด'],
+      ['hokaewmukdahan', 'หอแก้วมุกดาหาร', 'มุกดาหาร', 'พักผ่อนหย่อนใจ', 'หอชมเมืองริมโขงที่มองเห็นทัศนียภาพได้กว้างไกล'],
+      ['khundanprakanchon', 'เขื่อนขุนด่านปราการชล', 'นครนายก', 'ธรรมชาติ', 'เขื่อนคอนกรีตขนาดใหญ่ท่ามกลางภูเขาและน้ำตก'],
+      ['phrapathomchedi', 'พระปฐมเจดีย์', 'นครปฐม', 'วัด', 'พระเจดีย์องค์ใหญ่และศูนย์รวมศรัทธาของชาวนครปฐม'],
+      ['phrathatphanom', 'พระธาตุพนม', 'นครพนม', 'วัด', 'พระธาตุริมโขงที่เป็นศูนย์รวมศรัทธาของชาวอีสาน'],
+      ['buengboraphet', 'บึงบอระเพ็ด', 'นครสวรรค์', 'ธรรมชาติ', 'บึงน้ำจืดขนาดใหญ่และแหล่งดูนกสำคัญ'],
+      ['watphramahathat', 'วัดพระมหาธาตุวรมหาวิหาร', 'นครศรีธรรมราช', 'วัด', 'วัดพระบรมธาตุและมรดกทางพุทธศิลป์ของภาคใต้'],
+      ['watphumin', 'วัดภูมินทร์', 'น่าน', 'วัด', 'วัดจตุรมุขที่มีจิตรกรรมฝาผนังอันเลื่องชื่อ'],
+      ['pajowaterfall', 'น้ำตกปาโจ', 'นราธิวาส', 'ธรรมชาติ', 'น้ำตกกลางป่าชื้นในอุทยานแห่งชาติบูโด-สุไหงปาดี'],
+      ['phukradueng', 'อุทยานแห่งชาติภูผาเหล็ก', 'หนองบัวลำภู', 'ธรรมชาติ', 'จุดชมธรรมชาติและภูเขาหินทรายของอีสาน'],
+      ['salakaeoku', 'ศาลาแก้วกู่', 'หนองคาย', 'ประวัติศาสตร์', 'สวนประติมากรรมขนาดใหญ่ริมแม่น้ำโขง'],
+      ['kohkret', 'เกาะเกร็ด', 'นนทบุรี', 'ตลาด', 'ชุมชนมอญริมเจ้าพระยาที่มีเครื่องปั้นดินเผาและตลาดวันหยุด'],
+      ['watchedithong', 'วัดเจดีย์ทอง', 'ปทุมธานี', 'วัด', 'วัดเก่าแก่ริมแม่น้ำเจ้าพระยาในพื้นที่ปทุมธานี'],
+      ['kruesemosque', 'มัสยิดกรือเซะ', 'ปัตตานี', 'ประวัติศาสตร์', 'มัสยิดเก่าแก่และสถาปัตยกรรมสำคัญของปัตตานี'],
+      ['phangngabay', 'อ่าวพังงา', 'พังงา', 'ทะเล', 'อ่าวที่มีภูเขาหินปูนและเกาะกลางทะเลอันเป็นเอกลักษณ์'],
+      ['thalenoi', 'เขตห้ามล่าสัตว์ป่าทะเลน้อย', 'พัทลุง', 'ธรรมชาติ', 'ทะเลสาบและพื้นที่ชุ่มน้ำสำหรับชมควายน้ำและนก'],
+      ['kwanphayao', 'กว๊านพะเยา', 'พะเยา', 'พักผ่อนหย่อนใจ', 'ทะเลสาบน้ำจืดขนาดใหญ่ใจกลางเมืองพะเยา'],
+      ['khaokho', 'เขาค้อ', 'เพชรบูรณ์', 'ธรรมชาติ', 'จุดชมทะเลหมอกและภูเขาอากาศเย็น'],
+      ['phranakhonkhiri', 'พระนครคีรี', 'เพชรบุรี', 'ประวัติศาสตร์', 'พระราชวังบนยอดเขาพร้อมวิวเมืองเพชรบุรี'],
+      ['buengsifai', 'บึงสีไฟ', 'พิจิตร', 'พักผ่อนหย่อนใจ', 'บึงน้ำขนาดใหญ่และแลนด์มาร์กพญาชาละวัน'],
+      ['watphrasrirattanamahatat', 'วัดพระศรีรัตนมหาธาตุวรมหาวิหาร', 'พิษณุโลก', 'วัด', 'วัดพระพุทธชินราชและศูนย์รวมศรัทธาของเมือง'],
+      ['phaemuangphi', 'แพะเมืองผี', 'แพร่', 'ธรรมชาติ', 'เสาดินและหน้าผาธรรมชาติรูปร่างแปลกตา'],
+      ['laemphromthep', 'แหลมพรหมเทพ', 'ภูเก็ต', 'ทะเล', 'จุดชมพระอาทิตย์ตกชื่อดังทางตอนใต้ของเกาะภูเก็ต'],
+      ['watkaeopichit', 'วัดแก้วพิจิตร', 'ปราจีนบุรี', 'วัด', 'วัดที่มีสถาปัตยกรรมผสมไทย จีน และยุโรป'],
+      ['huahin', 'หัวหิน', 'ประจวบคีรีขันธ์', 'ทะเล', 'เมืองชายทะเลยอดนิยมที่มีหาด คาเฟ่ และตลาด'],
+      ['raksawarin', 'บ่อน้ำร้อนรักษะวาริน', 'ระนอง', 'พักผ่อนหย่อนใจ', 'บ่อน้ำพุร้อนธรรมชาติสำหรับแช่เท้าพักผ่อน'],
+      ['kohsamet', 'เกาะเสม็ด', 'ระยอง', 'ทะเล', 'เกาะท่องเที่ยวที่มีหาดทรายขาวและน้ำทะเลใส'],
+      ['phramahedichaimongkol', 'พระมหาเจดีย์ชัยมงคล', 'ร้อยเอ็ด', 'วัด', 'เจดีย์ขนาดใหญ่บนเนินเขาและศูนย์รวมศรัทธา'],
+      ['lalus', 'ละลุ', 'สระแก้ว', 'ธรรมชาติ', 'ประติมากรรมดินธรรมชาติจากการกัดเซาะของลมและฝน'],
+      ['phrathatchoengchum', 'พระธาตุเชิงชุม', 'สกลนคร', 'วัด', 'พระธาตุคู่เมืองสกลนครและพระพุทธรูปหลวงพ่อองค์แสน'],
+      ['muangsamutprakan', 'เมืองโบราณ', 'สมุทรปราการ', 'ประวัติศาสตร์', 'พิพิธภัณฑ์กลางแจ้งที่รวบรวมสถาปัตยกรรมไทย'],
+      ['donhoilot', 'ดอนหอยหลอด', 'สมุทรสาคร', 'ธรรมชาติ', 'พื้นที่ชุ่มน้ำชายฝั่งและแหล่งหอยหลอดขึ้นชื่อ'],
+      ['amphawa', 'ตลาดน้ำอัมพวา', 'สมุทรสงคราม', 'ตลาด', 'ตลาดน้ำยามเย็นริมคลองอัมพวาและชมหิ่งห้อย'],
+      ['watphraphutthabat', 'วัดพระพุทธบาทราชวรมหาวิหาร', 'สระบุรี', 'วัด', 'วัดสำคัญที่ประดิษฐานรอยพระพุทธบาท'],
+      ['kohlipe', 'เกาะหลีเป๊ะ', 'สตูล', 'ทะเล', 'เกาะน้ำใสและแนวปะการังในเขตอุทยานแห่งชาติตะรุเตา'],
+      ['watphranonchaksri', 'วัดพระนอนจักรสีห์', 'สิงห์บุรี', 'วัด', 'วัดเก่าแก่ที่ประดิษฐานพระนอนองค์ใหญ่'],
+      ['samila', 'หาดสมิหลา', 'สงขลา', 'ทะเล', 'ชายหาดเมืองสงขลาพร้อมรูปปั้นนางเงือกทอง'],
+      ['kohsamui', 'เกาะสมุย', 'สุราษฎร์ธานี', 'ทะเล', 'เกาะท่องเที่ยวที่มีหาดทราย วัด และวิถีชุมชน'],
+      ['banthaiklang', 'บ้านช้างศรีสะเกษ', 'สุรินทร์', 'พักผ่อนหย่อนใจ', 'ชุมชนเรียนรู้วิถีช้างและวัฒนธรรมชาวกูย'],
+      ['thilosu', 'น้ำตกทีลอซู', 'ตาก', 'ธรรมชาติ', 'น้ำตกขนาดใหญ่กลางผืนป่าอุ้มผาง'],
+      ['kohkradan', 'เกาะกระดาน', 'ตรัง', 'ทะเล', 'เกาะทะเลตรังที่มีหาดขาวและน้ำทะเลใส'],
+      ['kohchang', 'เกาะช้าง', 'ตราด', 'ทะเล', 'เกาะขนาดใหญ่ที่มีทั้งชายหาด น้ำตก และป่าเขา'],
+      ['phataem', 'อุทยานแห่งชาติผาแต้ม', 'อุบลราชธานี', 'ธรรมชาติ', 'หน้าผาริมโขงและภาพเขียนสีก่อนประวัติศาสตร์'],
+      ['talaybuadaeng', 'ทะเลบัวแดง', 'อุดรธานี', 'ธรรมชาติ', 'หนองน้ำที่บัวแดงบานงดงามในฤดูหนาว'],
+      ['huaikhakhaeng', 'เขตรักษาพันธุ์สัตว์ป่าห้วยขาแข้ง', 'อุทัยธานี', 'ธรรมชาติ', 'ผืนป่ามรดกโลกและแหล่งความหลากหลายทางชีวภาพ'],
+      ['sirikitdam', 'เขื่อนสิริกิติ์', 'อุตรดิตถ์', 'ธรรมชาติ', 'เขื่อนขนาดใหญ่ริมแม่น้ำน่านและจุดชมวิวภูเขา'],
+      ['betong', 'เมืองเบตง', 'ยะลา', 'พักผ่อนหย่อนใจ', 'เมืองชายแดนใต้ที่มีทะเลหมอกและวัฒนธรรมหลากหลาย'],
+      ['phayakhan', 'พญาคันคาก', 'ยโสธร', 'ประวัติศาสตร์', 'พิพิธภัณฑ์และแลนด์มาร์กที่เล่าเรื่องประเพณีบุญบั้งไฟ']
+    ];
+    const knownProvinces = new Set(places.map(place => place.province));
+    nationalHighlights.forEach(([id, name, province, category, desc]) => {
+      if (!knownProvinces.has(province)) places.push({ id, name, province, category, desc });
+    });
+
+    const categoryMeta = {
+      'วัด': { img: 'temple.png', color: '#C89B3C', grad: 'linear-gradient(135deg,#E9C873,#B8842A)', icon: '<path d="M12 2l7 6H5l7-6z"/><rect x="6" y="8" width="12" height="12" rx="1"/><line x1="12" y1="8" x2="12" y2="20"/>' },
+      'ธรรมชาติ': { img: 'nature.png', color: '#1F7A55', grad: 'linear-gradient(135deg,#3FAE83,#12543A)', icon: '<path d="M12 3l5 9H7l5-9z"/><path d="M9 12l-4 8h6"/><path d="M15 12l4 8h-6"/>' },
+      'ประวัติศาสตร์': { img: 'history.png', color: '#B0473F', grad: 'linear-gradient(135deg,#D97B70,#8E2E27)', icon: '<rect x="4" y="10" width="3" height="9"/><rect x="10.5" y="10" width="3" height="9"/><rect x="17" y="10" width="3" height="9"/><path d="M3 10l9-6 9 6"/><line x1="3" y1="21" x2="21" y2="21"/>' },
+      'ตลาด': { img: 'market.png', color: '#9A6E2E', grad: 'linear-gradient(135deg,#D6A552,#7A5320)', icon: '<path d="M4 9l1-5h14l1 5"/><path d="M4 9h16v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9z"/><line x1="9" y1="13" x2="9" y2="19"/><line x1="15" y1="13" x2="15" y2="19"/>' },
+      'ทะเล': { img: 'beach.png', color: '#1D6E93', grad: 'linear-gradient(135deg,#4FA7CE,#134A63)', icon: '<path d="M3 15q3-3 6 0t6 0 6 0"/><path d="M3 19q3-3 6 0t6 0 6 0"/><path d="M12 12V4l4 3"/>' },
+      'คาเฟ่': { img: 'cafe.png', color: '#A8553A', grad: 'linear-gradient(135deg,#D97745,#7C2D12)', icon: '<path d="M5 8h11v7a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V8z"/><path d="M16 10h1a3 3 0 0 1 0 6h-1"/><path d="M7 4v2M10 3v3M13 4v2"/>' },
+      'พักผ่อนหย่อนใจ': { img: 'park.png', color: '#0F9F82', grad: 'linear-gradient(135deg,#2DD4BF,#0F766E)', icon: '<path d="M12 3v18"/><path d="M12 5c-4 0-6 2.5-6 5 3 0 5-1 6-3"/><path d="M12 8c4 0 6 2.5 6 5-3 0-5-1-6-3"/><path d="M5 21h14"/>' },
+    };
+
+    const avatarPalette = ['#1877F2', '#00A28A', '#E4573D', '#C89B3C', '#8A55C4', '#2D9CDB'];
+    function colorFor(str) {
+      let h = 0; for (let i = 0; i < str.length; i++) h = str.charCodeAt(i) + ((h << 5) - h);
+      return avatarPalette[Math.abs(h) % avatarPalette.length];
+    }
+    function initialOf(str) { return (str || '?').trim().charAt(0) || '?'; }
+
+    const ICONS = {
+      pinBtn: '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>',
+      grid: '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>',
+      check: '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>',
+      flag: '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4"/><path d="M5 4h13l-3 4 3 4H5"/></svg>',
+      thumb: '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 22V11l5-8 1.5 1L12 10h7a2 2 0 0 1 2 2.2l-1.2 6A3 3 0 0 1 16.8 21H7z"/><path d="M7 11H4v11h3"/></svg>',
+      thumbFilled: '<svg viewBox="0 0 24 24" stroke-width="0"><path d="M7 22V11l5-8 1.5 1L12 10h7a2 2 0 0 1 2 2.2l-1.2 6A3 3 0 0 1 16.8 21H7z"/><path fill="none" stroke="currentColor" stroke-width="2" d="M7 11H4v11h3"/></svg>',
+      bubble: '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H8l-5 3 1.4-5.2A8 8 0 1 1 21 12z"/></svg>',
+      send: '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>',
+    };
+
+    const KEYS = { checkins: 'checkins', likedByMe: 'liked_by_me', profileName: 'profile_name' };
+    let checkins = {};       // personal
+    let likedByMe = {};      // personal
+    let profileName = '';    // personal
+    let likeCounts = {};     // shared, per place id -> number
+    let comments = {};       // shared, per place id -> array
+    let openComments = {};   // ui-only
+
+    let activeStatus = 'all';
+    let searchTerm = '';
+
+    const postsList = document.getElementById('postsList');
+    const emptyState = document.getElementById('emptyState');
+
+    function iconSvg(category) {
+      const meta = categoryMeta[category];
+      return `<svg viewBox="0 0 24 24" fill="none" stroke="${meta.color}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${meta.icon}</svg>`;
+    }
+
+    function buildSideMenus() {
+      const statusMenu = document.getElementById('statusMenu');
+      const statuses = [
+        { key: 'all', label: 'ทั้งหมด', icon: ICONS.grid },
+        { key: 'checked', label: 'เช็คอินแล้ว', icon: ICONS.check },
+        { key: 'unvisited', label: 'ยังไม่ได้ไป', icon: ICONS.flag },
+      ];
+      statusMenu.innerHTML = `<div class="side-title">มุมมอง</div>` + statuses.map(s =>
+        `<button class="side-item ${s.key === activeStatus ? 'active' : ''}" data-status="${s.key}">${s.icon}<span>${s.label}</span></button>`
+      ).join('');
+      statusMenu.querySelectorAll('.side-item').forEach(btn => {
+        btn.addEventListener('click', () => { activeStatus = btn.dataset.status; buildSideMenus(); render(); });
+      });
+    }
+
+    function formatDate(iso) {
+      const d = new Date(iso);
+      return d.toLocaleDateString('th-TH', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+    function formatTime(iso) {
+      const d = new Date(iso);
+      return d.toLocaleDateString('th-TH', { day: 'numeric', month: 'short' }) + ' · ' +
+        d.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+    }
+
+    async function saveJSON(key, value, shared) {
+      try { await window.storage.set(key, JSON.stringify(value), shared); }
+      catch (e) { console.error('บันทึกไม่สำเร็จ', key, e); }
+    }
+    async function loadJSON(key, shared, fallback) {
+      try {
+        const r = await window.storage.get(key, shared);
+        return r && r.value ? JSON.parse(r.value) : fallback;
+      } catch (e) { return fallback; }
+    }
+
+    async function toggleCheckin(id) {
+      if (checkins[id]) delete checkins[id]; else checkins[id] = new Date().toISOString();
+      await saveJSON(KEYS.checkins, checkins, false);
+      render();
+    }
+
+    async function toggleLike(id) {
+      const current = likeCounts[id] || 0;
+      if (likedByMe[id]) {
+        likedByMe[id] = false;
+        likeCounts[id] = Math.max(0, current - 1);
+      } else {
+        likedByMe[id] = true;
+        likeCounts[id] = current + 1;
+      }
+      await saveJSON(KEYS.likedByMe, likedByMe, false);
+      await saveJSON(`place_likes:${id}`, likeCounts[id], true);
+      render();
+    }
+
+    function toggleComments(id) {
+      openComments[id] = !openComments[id];
+      render();
+      if (openComments[id]) {
+        setTimeout(() => {
+          const input = document.querySelector(`.comment-text-input[data-id="${id}"]`);
+          if (input) input.focus();
+        }, 30);
+      }
+    }
+
+    async function submitComment(id) {
+      const input = document.querySelector(`.comment-text-input[data-id="${id}"]`);
+      if (!input) return;
+      const text = input.value.trim();
+      if (!text) return;
+      const name = profileName.trim() || 'ผู้เยี่ยมชม';
+      if (!comments[id]) comments[id] = [];
+      comments[id].push({ name, text, ts: new Date().toISOString() });
+      await saveJSON(`place_comments:${id}`, comments[id], true);
+      input.value = '';
+      render();
+      setTimeout(() => {
+        const el = document.querySelector(`.comment-text-input[data-id="${id}"]`);
+        if (el) el.focus();
+      }, 30);
+    }
+
+    function updateNavIdentity() {
+      const label = profileName.trim() || 'ผู้เยี่ยมชม';
+      document.getElementById('navName').textContent = label;
+      document.getElementById('navAvatar').textContent = initialOf(label);
+      document.getElementById('navAvatar').style.background = colorFor(label);
+      document.getElementById('nameInput').value = profileName;
+    }
+
+    function openPlaceHistory(id) {
+      const place = places.find(p => p.id === id);
+      if (!place) return;
+      const meta = categoryMeta[place.category];
+      const modal = document.getElementById('placeModal');
+      const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${place.name} ${place.province} ประเทศไทย`)}`;
+      document.getElementById('dialogHero').style.background = `linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.75)), url('${meta.img}')`;
+      document.getElementById('dialogHero').style.backgroundSize = 'cover';
+      document.getElementById('dialogHero').style.backgroundPosition = 'center';
+      document.getElementById('dialogHero').innerHTML = `
+    <div style="position: relative; z-index: 2; width: 100%;">
+      <div class="dialog-eyebrow">PLACE STORY · ${place.province}</div>
+      <h2 class="dialog-title" id="dialogTitle">${place.name}</h2>
+    </div>`;
+      document.getElementById('dialogContent').innerHTML = `
+    <div class="history-label">ประวัติสถานที่</div>
+    <p class="history-copy">${placeHistories[id] || place.desc}</p>
+    <div class="history-facts">
+      <div class="history-fact"><span>จังหวัด</span><b>${place.province}</b></div>
+      <div class="history-fact"><span>สถานะของคุณ</span><b>${checkins[id] ? 'เช็คอินแล้ว' : 'รอให้คุณไปเยือน'}</b></div>
+    </div>
+    <div class="history-tip">✦ เลือกเช็คอินเพื่อบันทึกว่าสถานที่นี้อยู่ในเส้นทางการเดินทางของคุณ</div>
+    <a class="maps-link" href="${mapsUrl}" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+      เปิดเส้นทางใน Google Maps
+    </a>`;
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      modal.querySelector('.dialog-close').focus();
+    }
+
+    function openVisitedProvinces() {
+      const visitedProvinces = {};
+      places.forEach(p => {
+        if (checkins[p.id]) {
+          if (!visitedProvinces[p.province]) visitedProvinces[p.province] = [];
+          visitedProvinces[p.province].push(p);
+        }
+      });
+
+      const modal = document.getElementById('placeModal');
+      const dialogHero = document.getElementById('dialogHero');
+      const dialogContent = document.getElementById('dialogContent');
+
+      dialogHero.style.background = `linear-gradient(to bottom, rgba(7, 17, 31, 0.3), rgba(7, 17, 31, 0.9)), url('park.png')`;
+      dialogHero.style.backgroundSize = 'cover';
+      dialogHero.style.backgroundPosition = 'center';
+      dialogHero.innerHTML = `
+        <div style="position: relative; z-index: 2; width: 100%;">
+          <div class="dialog-eyebrow">MY TRAVEL LOG</div>
+          <h2 class="dialog-title" id="dialogTitle">จังหวัดที่คุณเคยไปเยือน</h2>
+        </div>`;
+
+      const entries = Object.entries(visitedProvinces);
+      let contentHtml = '';
+
+      if (entries.length === 0) {
+        contentHtml = `
+          <div class="comment-empty" style="text-align: center; padding: 40px 0;">
+            <div style="font-size: 40px; margin-bottom: 12px;">🗺️</div>
+            <div style="font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 6px;">คุณยังไม่มีจังหวัดที่เช็คอิน</div>
+            <div style="color: #9db0c8; font-size: 13.5px;">สะสมตราประทับของคุณได้โดยการกดปุ่ม "เช็คอิน" ในสถานที่ต่างๆ ที่เคยไปมาแล้ว!</div>
+          </div>`;
+      } else {
+        contentHtml = `
+          <div class="history-label" style="margin-bottom: 16px;">รายชื่อจังหวัดทั้งหมด (${entries.length} จังหวัด)</div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px;">
+            ${entries.map(([province, items]) => `
+              <div style="border: 1px solid rgba(148, 163, 184, 0.16); border-radius: 14px; padding: 16px; background: rgba(20, 35, 57, 0.6); backdrop-filter: blur(8px);">
+                <div style="font-weight: 700; color: #7dd3fc; font-size: 15.5px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                  <span>📍 จังหวัด${province}</span>
+                  <span style="font-size: 11.5px; color: #7dd3fc; background: rgba(56, 189, 248, 0.18); padding: 3px 10px; border-radius: 99px; font-weight: 600;">
+                    ${items.length} แห่ง
+                  </span>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  ${items.map(item => `
+                    <div style="font-size: 13.5px; color: #d8e7f5; display: flex; align-items: center; gap: 8px; cursor: pointer; transition: color 0.15s;" onclick="closePlaceHistory(); setTimeout(() => openPlaceHistory('${item.id}'), 200);">
+                      <span style="color: #10b981; font-weight: 700;">✓</span>
+                      <span style="text-decoration: underline; text-underline-offset: 3px;">${item.name}</span>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            `).join('')}
+          </div>`;
+      }
+
+      dialogContent.innerHTML = contentHtml;
+
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      modal.querySelector('.dialog-close').focus();
+    }
+
+    function closePlaceHistory() {
+      const modal = document.getElementById('placeModal');
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    function renderPost(p) {
+      const isChecked = !!checkins[p.id];
+      const isLiked = !!likedByMe[p.id];
+      const likeCount = likeCounts[p.id] || 0;
+      const placeComments = comments[p.id] || [];
+      const isOpen = !!openComments[p.id];
+      const meta = categoryMeta[p.category];
+
+      const commentsHtml = placeComments.length
+        ? placeComments.map(c => `
+        <div class="comment-row">
+          <div class="comment-avatar" style="background:${colorFor(c.name)};">${initialOf(c.name)}</div>
+          <div>
+            <div class="comment-bubble">
+              <div class="cname">${c.name}</div>
+              <div class="ctext">${c.text}</div>
+            </div>
+            <div class="comment-time">${formatTime(c.ts)}</div>
+          </div>
+        </div>`).join('')
+        : `<div class="comment-empty">ยังไม่มีความคิดเห็น เป็นคนแรกที่พูดถึงที่นี่สิ</div>`;
+
+      return `
+  <div class="post" data-place="${p.id}" role="button" tabindex="0" aria-label="ดูประวัติ ${p.name}">
+    <div class="post-head">
+      <div class="post-avatar" style="background:${meta.color}22;">${iconSvg(p.category)}</div>
+      <div class="post-titles">
+        <div class="name">${p.name}</div>
+        <div class="meta">${ICONS.pinBtn}<span>${p.province}</span></div>
+      </div>
+    </div>
+    <div class="post-cover" style="background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.45)), url('${meta.img}'); background-size: cover; background-position: center;">
+      <div class="tagline">${p.province}</div>
+    </div>
+    <div class="post-body">${p.desc}</div>
+    <div class="post-counts">
+      <div class="likes">
+        ${likeCount > 0 ? `<span class="like-icon-mini">${ICONS.thumbFilled}</span><span>${likeCount}</span>` : `<span></span>`}
+      </div>
+      <button data-toggle-comments="${p.id}">${placeComments.length > 0 ? placeComments.length + ' ความคิดเห็น' : 'แสดงความคิดเห็น'}</button>
+    </div>
+    <div class="post-actions">
+      <button class="action-btn ${isLiked ? 'liked' : ''}" data-like="${p.id}">${isLiked ? ICONS.thumbFilled : ICONS.thumb}<span>ถูกใจ</span></button>
+      <button class="action-btn" data-toggle-comments="${p.id}">${ICONS.bubble}<span>ความคิดเห็น</span></button>
+      <button class="action-btn ${isChecked ? 'checked' : ''}" data-checkin="${p.id}">${ICONS.pinBtn}<span>${isChecked ? 'เช็คอินแล้ว' : 'เช็คอิน'}</span></button>
+    </div>
+    ${isChecked ? `<div class="note">คุณเช็คอินที่นี่เมื่อ ${formatDate(checkins[p.id])}</div>` : ''}
+    <div class="comments-section ${isOpen ? 'open' : ''}">
+      <div class="comment-list">${commentsHtml}</div>
+      <div class="comment-input-row">
+        <div class="comment-avatar" style="background:${colorFor(profileName || 'ผู้เยี่ยมชม')};">${initialOf(profileName || 'ผู้เยี่ยมชม')}</div>
+        <div class="comment-input-wrap">
+          <input class="comment-text-input" data-id="${p.id}" type="text" placeholder="เขียนความคิดเห็น...">
+          <button class="comment-send" data-send="${p.id}">${ICONS.send}</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+    }
+
+    function renderSuggestions() {
+      const list = document.getElementById('suggestList');
+      const unvisited = places.filter(p => !checkins[p.id]).slice(0, 4);
+      list.innerHTML = unvisited.map(p => {
+        const meta = categoryMeta[p.category];
+        return `
+    <div class="suggest-item">
+      <div class="mini-badge" style="background:${meta.color}22;">${iconSvg(p.category)}</div>
+      <div class="suggest-info">
+        <div class="n">${p.name}</div>
+        <div class="p">${p.province}</div>
+      </div>
+      <button class="suggest-btn" data-checkin="${p.id}">เช็คอิน</button>
+    </div>`;
+      }).join('') || `<div class="comment-empty">คุณเช็คอินครบทุกที่แล้ว 🎉</div>`;
+    }
+
+    function render() {
+      const term = searchTerm.trim().toLowerCase();
+      const filtered = places.filter(p => {
+        const matchesSearch = !term || p.name.toLowerCase().includes(term) || p.province.toLowerCase().includes(term);
+        const isChecked = !!checkins[p.id];
+        const matchesStatus = activeStatus === 'all' || (activeStatus === 'checked' && isChecked) || (activeStatus === 'unvisited' && !isChecked);
+        return matchesSearch && matchesStatus;
+      });
+
+      postsList.innerHTML = filtered.map(renderPost).join('');
+      emptyState.style.display = filtered.length === 0 ? 'block' : 'none';
+
+      document.getElementById('statTotal').textContent = places.length;
+      const checkedCount = Object.keys(checkins).filter(id => checkins[id]).length;
+      document.getElementById('statChecked').textContent = checkedCount;
+      const provinces = new Set(places.filter(p => checkins[p.id]).map(p => p.province));
+      document.getElementById('statProvince').textContent = provinces.size;
+
+      renderSuggestions();
+    }
+
+    // event delegation
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('[data-close-place]')) return closePlaceHistory();
+      const likeBtn = e.target.closest('[data-like]');
+      if (likeBtn) return toggleLike(likeBtn.dataset.like);
+      const checkinBtn = e.target.closest('[data-checkin]');
+      if (checkinBtn) return toggleCheckin(checkinBtn.dataset.checkin);
+      const commentsBtn = e.target.closest('[data-toggle-comments]');
+      if (commentsBtn) return toggleComments(commentsBtn.dataset.toggleComments);
+      const sendBtn = e.target.closest('[data-send]');
+      if (sendBtn) return submitComment(sendBtn.dataset.send);
+      if (e.target.closest('input, textarea, a, button')) return;
+      const post = e.target.closest('[data-place]');
+      if (post) openPlaceHistory(post.dataset.place);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.getElementById('placeModal').classList.contains('open')) {
+        closePlaceHistory();
+        return;
+      }
+      if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[data-place]')) {
+        e.preventDefault();
+        openPlaceHistory(e.target.dataset.place);
+        return;
+      }
+      if (e.key === 'Enter' && e.target.classList.contains('comment-text-input')) {
+        submitComment(e.target.dataset.id);
+      }
+    });
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      searchTerm = e.target.value;
+      render();
+    });
+
+    let nameDebounce;
+    document.getElementById('nameInput').addEventListener('input', (e) => {
+      profileName = e.target.value;
+      updateNavIdentity();
+      clearTimeout(nameDebounce);
+      nameDebounce = setTimeout(() => saveJSON(KEYS.profileName, profileName, false), 400);
+    });
+
+    document.getElementById('statProvinceRow').addEventListener('click', openVisitedProvinces);
+
+    async function init() {
+      checkins = await loadJSON(KEYS.checkins, false, {});
+      likedByMe = await loadJSON(KEYS.likedByMe, false, {});
+      const savedName = await loadJSON(KEYS.profileName, false, '');
+      profileName = typeof savedName === 'string' ? savedName : '';
+
+      await Promise.all(places.map(async p => {
+        const count = await loadJSON(`place_likes:${p.id}`, true, 0);
+        likeCounts[p.id] = typeof count === 'number' ? count : 0;
+        const cs = await loadJSON(`place_comments:${p.id}`, true, []);
+        comments[p.id] = Array.isArray(cs) ? cs : [];
+      }));
+
+      buildSideMenus();
+      updateNavIdentity();
+      render();
+    }
+
+    init();
+  </script>
+</body>
+
+</html>
