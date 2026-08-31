@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ศรีสะเกษสโลว์ไกด์ — เที่ยวช้า ๆ ในเมืองลำดวน</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
   <style>
     :root {
@@ -907,9 +907,28 @@
 
     /* ---------------- premium travel dashboard ---------------- */
     body {
-      background: #07111f;
+      background: #040d1a;
       color: #e8f0ff;
+      font-family: 'Plus Jakarta Sans', 'Noto Sans Thai', sans-serif;
       isolation: isolate;
+    }
+
+    /* Custom premium scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #040d1a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(56, 189, 248, 0.20);
+      border-radius: 10px;
+      border: 2px solid #040d1a;
+      transition: background 0.3s;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(56, 189, 248, 0.45);
     }
 
     body::before,
@@ -952,9 +971,11 @@
     }
 
     .topnav {
-      background: rgba(7, 17, 31, .72);
-      border-bottom: 1px solid rgba(148, 163, 184, .16);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, .17);
+      background: rgba(4, 13, 26, 0.75);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
 
     .brand-name {
@@ -967,32 +988,38 @@
     }
 
     .nav-search {
-      background: rgba(148, 163, 184, .12);
-      border-color: rgba(148, 163, 184, .13);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 99px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .nav-search input,
     .nav-search input::placeholder {
-      color: #dbeafe;
+      color: #e0f2fe;
     }
 
     .nav-search svg {
-      stroke: #8ba5c7;
+      stroke: #94a3b8;
     }
 
     .nav-search:focus-within {
-      background: rgba(15, 23, 42, .86);
-      border-color: rgba(56, 189, 248, .7);
-      box-shadow: 0 0 0 4px rgba(14, 165, 233, .12), 0 0 28px rgba(14, 165, 233, .13);
+      background: rgba(4, 13, 26, 0.85);
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
     }
 
     .nav-profile {
-      background: rgba(148, 163, 184, .12);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       color: #f1f5f9;
+      transition: all 0.3s ease;
     }
 
     .nav-profile:hover {
-      background: rgba(56, 189, 248, .16);
+      background: rgba(56, 189, 248, 0.15);
+      border-color: rgba(56, 189, 248, 0.35);
+      transform: translateY(-1px);
     }
 
     .shell {
@@ -1004,33 +1031,41 @@
     .name-card,
     .post,
     .empty-feed {
-      background: linear-gradient(145deg, rgba(20, 35, 57, .83), rgba(10, 22, 39, .74));
-      border: 1px solid rgba(148, 163, 184, .16);
-      box-shadow: 0 20px 45px rgba(0, 0, 0, .20), inset 0 1px 0 rgba(255, 255, 255, .045);
-      backdrop-filter: blur(18px);
+      background: rgba(13, 27, 48, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-radius: 16px;
     }
 
     .side-title {
-      color: #7dd3fc;
+      color: #38bdf8;
+      font-weight: 700;
+      letter-spacing: 0.1em;
     }
 
     .side-item {
-      color: #b9c9de;
+      color: #cbd5e1;
+      border-radius: 10px;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .side-item:hover {
-      color: #f8fbff;
-      background: rgba(148, 163, 184, .11);
+      color: #fff;
+      background: rgba(56, 189, 248, 0.1);
+      transform: translateX(4px);
     }
 
     .side-item.active {
       color: #fff;
-      background: linear-gradient(90deg, rgba(14, 165, 233, .26), rgba(99, 102, 241, .16));
-      box-shadow: inset 3px 0 0 #38bdf8;
+      background: linear-gradient(90deg, rgba(14, 165, 233, 0.25), rgba(99, 102, 241, 0.12));
+      box-shadow: inset 4px 0 0 #38bdf8, 0 4px 15px rgba(56, 189, 248, 0.15);
+      font-weight: 600;
     }
 
     .side-item.active svg {
-      stroke: #7dd3fc;
+      stroke: #38bdf8;
     }
 
     .stat-box h3 {
@@ -1065,8 +1100,8 @@
       position: relative;
       overflow: hidden;
       min-height: 102px;
-      background: linear-gradient(125deg, rgba(30, 64, 175, .62), rgba(14, 116, 144, .47) 52%, rgba(15, 118, 110, .4));
-      border-color: rgba(125, 211, 252, .26);
+      background: linear-gradient(125deg, rgba(30, 64, 175, 0.45), rgba(14, 116, 144, 0.3) 52%, rgba(15, 118, 110, 0.25));
+      border-color: rgba(56, 189, 248, 0.2);
     }
 
     .name-card::after {
@@ -1076,13 +1111,13 @@
       height: 230px;
       right: -90px;
       top: -125px;
-      border: 1px solid rgba(255, 255, 255, .19);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 50%;
-      box-shadow: 0 0 0 28px rgba(255, 255, 255, .045), 0 0 0 62px rgba(255, 255, 255, .025);
+      box-shadow: 0 0 0 28px rgba(255, 255, 255, .015), 0 0 0 62px rgba(255, 255, 255, .005);
     }
 
     .name-card p {
-      color: #e0f2fe;
+      color: #bae6fd;
       font-weight: 500;
       position: relative;
       z-index: 1;
@@ -1091,58 +1126,68 @@
     .name-card input {
       position: relative;
       z-index: 1;
-      background: rgba(3, 15, 29, .42);
+      background: rgba(4, 13, 26, 0.5);
       color: #fff;
-      border-color: rgba(186, 230, 253, .35);
+      border: 1px solid rgba(125, 211, 252, 0.2);
       border-radius: 10px;
+      transition: all 0.3s ease;
     }
 
     .name-card input::placeholder {
-      color: #b9d8e9;
+      color: #94a3b8;
     }
 
     .name-card input:focus {
-      border-color: #7dd3fc;
-      background: rgba(3, 15, 29, .62);
+      border-color: #38bdf8;
+      background: rgba(4, 13, 26, 0.8);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
     }
 
     .post {
       overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
     }
 
     .post::before {
       content: '';
-      height: 2px;
+      height: 3px;
       display: block;
       background: linear-gradient(90deg, #22d3ee, #818cf8 50%, #34d399);
-      opacity: .8;
+      opacity: .85;
     }
 
     .post:hover {
-      box-shadow: 0 24px 55px rgba(0, 0, 0, .31), 0 0 0 1px rgba(125, 211, 252, .11);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(56, 189, 248, 0.25);
     }
 
     .post-head {
-      background: linear-gradient(90deg, rgba(255, 255, 255, .025), transparent);
+      background: linear-gradient(90deg, rgba(255, 255, 255, .03), transparent);
     }
 
     .post-titles .name,
     .post-body {
-      color: #f0f7ff;
+      color: #f8fafc;
     }
 
     .post-titles .meta,
     .post-counts,
     .note {
-      color: #9db0c8;
+      color: #94a3b8;
     }
 
     .post-titles .meta svg {
-      stroke: #75c9ed;
+      stroke: #38bdf8;
     }
 
     .post-cover {
       height: 212px;
+      overflow: hidden;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .post:hover .post-cover {
+      transform: scale(1.025);
     }
 
     .post-cover::after {
@@ -1151,48 +1196,85 @@
       top: 13px;
       right: 15px;
       font-size: 9px;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: .15em;
-      color: rgba(255, 255, 255, .78);
+      color: rgba(255, 255, 255, .85);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     }
 
     .post-cover .tagline {
-      border: 1px solid rgba(255, 255, 255, .20);
+      border: 1px solid rgba(255, 255, 255, .25);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+      background: rgba(15, 23, 42, .45);
     }
 
     .post-actions {
-      border-top-color: rgba(148, 163, 184, .13);
+      border-top-color: rgba(255, 255, 255, 0.08);
     }
 
     .action-btn {
-      color: #9db0c8;
+      color: #94a3b8;
+      border-radius: 8px;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .action-btn svg {
-      stroke: #9db0c8;
+      stroke: #94a3b8;
+      transition: stroke 0.25s, fill 0.25s, transform 0.25s;
     }
 
     .action-btn:hover {
-      color: #e0f2fe;
-      background: rgba(56, 189, 248, .11);
+      color: #f1f5f9;
+      background: rgba(56, 189, 248, .12);
+    }
+
+    .action-btn:hover svg {
+      stroke: #38bdf8;
+      transform: scale(1.1);
+    }
+
+    /* Glowing states when activated */
+    .action-btn.liked {
+      color: #38bdf8 !important;
+      text-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+    }
+    .action-btn.liked svg {
+      stroke: #38bdf8 !important;
+      fill: #38bdf8 !important;
+      filter: drop-shadow(0 0 4px rgba(56, 189, 248, 0.5));
+    }
+
+    .action-btn.checked {
+      color: #10b981 !important;
+      text-shadow: 0 0 10px rgba(16, 185, 129, 0.35);
+    }
+    .action-btn.checked svg {
+      stroke: #10b981 !important;
+      fill: #10b981 !important;
+      filter: drop-shadow(0 0 4px rgba(16, 185, 129, 0.5));
     }
 
     .comments-section {
-      background: rgba(2, 12, 25, .22);
+      background: rgba(4, 13, 26, 0.3);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .comment-bubble {
-      background: rgba(148, 163, 184, .13);
-      color: #eef7ff;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      color: #f1f5f9;
+      border-radius: 14px;
     }
 
     .comment-time,
     .comment-empty {
-      color: #9db0c8;
+      color: #64748b;
     }
 
     .comment-input-wrap {
-      background: rgba(148, 163, 184, .12);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
     }
 
     .comment-input-wrap input {
@@ -1200,24 +1282,29 @@
     }
 
     .comment-input-wrap input::placeholder {
-      color: #8fa4bd;
+      color: #64748b;
     }
 
     .suggest-info .n {
-      color: #eaf4ff;
+      color: #f1f5f9;
     }
 
     .suggest-info .p {
-      color: #91a7c1;
+      color: #94a3b8;
     }
 
     .suggest-btn {
-      background: rgba(14, 165, 233, .16);
-      color: #7dd3fc;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      color: #38bdf8;
+      border-radius: 8px;
+      transition: all 0.2s ease;
     }
 
     .suggest-btn:hover {
-      background: rgba(14, 165, 233, .28);
+      background: rgba(56, 189, 248, 0.25);
+      border-color: #38bdf8;
+      transform: translateY(-1px);
     }
 
     .empty-feed {
