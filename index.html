@@ -1530,6 +1530,315 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* --- New Additions: Nav Buttons, Badges, Modals, Emoji Bar, Toast --- */
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+    }
+
+    .btn-nav-pin {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #0ea5e9, #2563eb);
+      color: #fff;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 99px;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(14, 165, 233, 0.35);
+      transition: all 0.25s ease;
+    }
+    .btn-nav-pin:hover {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow: 0 6px 18px rgba(14, 165, 233, 0.5);
+    }
+
+    .photo-tag-badge {
+      position: absolute;
+      bottom: 12px;
+      left: 14px;
+      z-index: 2;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(125, 211, 252, 0.35);
+      color: #f8fafc;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 99px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .coords-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      color: #38bdf8;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 6px;
+      margin-top: 6px;
+      font-family: monospace;
+    }
+
+    .location-details {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .loc-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(148, 163, 184, 0.12);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      color: #cbd5e1;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 6px;
+    }
+
+    .dist-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #38bdf8;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 6px;
+    }
+
+    .emoji-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px 2px;
+      overflow-x: auto;
+    }
+
+    .emoji-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 4px 10px;
+      font-size: 13px;
+      color: #e2e8f0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .emoji-btn:hover {
+      background: rgba(56, 189, 248, 0.18);
+      border-color: rgba(56, 189, 248, 0.4);
+      transform: scale(1.08);
+    }
+
+    .emoji-btn.active {
+      background: rgba(56, 189, 248, 0.25);
+      border-color: #38bdf8;
+      color: #fff;
+    }
+
+    .share-btn {
+      color: #94a3b8;
+      background: transparent;
+      border: none;
+      font-size: 13.5px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .share-btn:hover {
+      background: rgba(56, 189, 248, 0.12);
+      color: #38bdf8;
+    }
+
+    /* Modal Form Styles */
+    .custom-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: none;
+      place-items: center;
+      padding: 20px;
+    }
+
+    .custom-modal.open {
+      display: grid;
+    }
+
+    .modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(2, 8, 23, 0.8);
+      backdrop-filter: blur(12px);
+    }
+
+    .modal-box {
+      position: relative;
+      width: min(540px, 100%);
+      max-height: min(720px, calc(100vh - 40px));
+      overflow-y: auto;
+      background: linear-gradient(145deg, rgba(17, 34, 58, 0.98), rgba(6, 17, 32, 0.98));
+      border: 1px solid rgba(125, 211, 252, 0.25);
+      border-radius: 20px;
+      padding: 26px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+      animation: dialogIn 0.24s ease-out;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .modal-header h3 {
+      font-size: 19px;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .modal-close-btn {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    .modal-close-btn:hover { color: #fff; }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #bae6fd;
+      margin-bottom: 6px;
+    }
+
+    .form-control {
+      width: 100%;
+      background: rgba(4, 13, 26, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .form-control:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+
+    .btn-gps {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #34d399;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 8px;
+    }
+
+    .btn-gps:hover {
+      background: rgba(16, 185, 129, 0.25);
+      border-color: #34d399;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #2563eb, #38bdf8);
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+      transition: all 0.25s;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.5);
+    }
+
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .toast {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid #38bdf8;
+      color: #f8fafc;
+      padding: 12px 18px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      font-size: 13.5px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: toastIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.9); }
+      to { opacity: 1; transform: none; }
+    }
   </style>
 </head>
 
@@ -1547,10 +1856,16 @@
       </svg>
       <input id="searchInput" type="text" placeholder="ค้นหาสถานที่หรือจังหวัด">
     </div>
-    <button class="nav-profile" id="navProfile">
-      <div class="avatar" id="navAvatar">น</div>
-      <span id="navName">ผู้เยี่ยมชม</span>
-    </button>
+    <div class="nav-actions">
+      <button class="btn-nav-pin" id="openAddPinBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        <span>+ ปักหมุดที่ใหม่</span>
+      </button>
+      <button class="nav-profile" id="navProfile">
+        <div class="avatar" id="navAvatar">น</div>
+        <span id="navName">ผู้เยี่ยมชม</span>
+      </button>
+    </div>
   </nav>
 
   <div class="shell">
@@ -1598,101 +1913,300 @@
     </section>
   </div>
 
+  <!-- Auth Modal -->
+  <div class="custom-modal" id="authModal">
+    <div class="modal-backdrop" id="closeAuthModalBackdrop"></div>
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="authModalTitle">เข้าสู่ระบบ / ลงทะเบียน</h3>
+        <button class="modal-close-btn" id="closeAuthModalBtn">&times;</button>
+      </div>
+      <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+        <button class="btn-gps" id="tabLogin" style="flex:1; justify-content:center;">เข้าสู่ระบบ</button>
+        <button class="btn-gps" id="tabRegister" style="flex:1; justify-content:center; background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.1); color:#94a3b8;">สมัครสมาชิก</button>
+      </div>
+      <div id="authError" style="color: #f87171; font-size: 13px; margin-bottom: 12px; display: none;"></div>
+      
+      <!-- Login Form -->
+      <form id="loginForm">
+        <div class="form-group">
+          <label>ชื่อผู้ใช้ (Username)</label>
+          <input type="text" id="loginUsername" class="form-control" placeholder="กรอกชื่อผู้ใช้" required>
+        </div>
+        <div class="form-group">
+          <label>รหัสผ่าน (Password)</label>
+          <input type="password" id="loginPassword" class="form-control" placeholder="กรอกรหัสผ่าน" required>
+        </div>
+        <button type="submit" class="btn-submit">เข้าสู่ระบบ</button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="registerForm" style="display: none;">
+        <div class="form-group">
+          <label>ชื่อผู้ใช้ (Username)</label>
+          <input type="text" id="regUsername" class="form-control" placeholder="ตั้งชื่อผู้ใช้ภาษาอังกฤษ" required>
+        </div>
+        <div class="form-group">
+          <label>ชื่อที่ต้องการให้แสดง (Display Name)</label>
+          <input type="text" id="regDisplayName" class="form-control" placeholder="เช่น นายสโลว์ไลฟ์ ศรีสะเกษ">
+        </div>
+        <div class="form-group">
+          <label>รหัสผ่าน (Password)</label>
+          <input type="password" id="regPassword" class="form-control" placeholder="ตั้งรหัสผ่าน" required>
+        </div>
+        <button type="submit" class="btn-submit">สมัครสมาชิกใหม่</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Pin Modal -->
+  <div class="custom-modal" id="addPinModal">
+    <div class="modal-backdrop" id="closeAddPinBackdrop"></div>
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>📍 ปักหมุดสถานที่ใหม่</h3>
+        <button class="modal-close-btn" id="closeAddPinBtn">&times;</button>
+      </div>
+      <form id="createPinForm" enctype="multipart/form-data">
+        <div class="form-group">
+          <label>ชื่อสถานที่ *</label>
+          <input type="text" id="pinName" class="form-control" placeholder="เช่น จุดชมวิวผาพญากูปรี, คาเฟ่ริมธาร" required>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label>จังหวัด *</label>
+            <input type="text" id="pinProvince" class="form-control" value="ศรีสะเกษ" required>
+          </div>
+          <div class="form-group">
+            <label>อำเภอ</label>
+            <input type="text" id="pinDistrict" class="form-control" placeholder="เช่น อ.เมืองศรีสะเกษ, อ.กันทรลักษ์">
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label>หมู่บ้าน / ตำบล</label>
+            <input type="text" id="pinVillage" class="form-control" placeholder="เช่น บ้านโนนแกด, ต.หนองหญ้าลาด">
+          </div>
+          <div class="form-group">
+            <label>หมวดหมู่</label>
+            <select id="pinCategory" class="form-control" style="background:#091424; color:#fff;">
+              <option value="วัด">วัด</option>
+              <option value="ธรรมชาติ">ธรรมชาติ</option>
+              <option value="ประวัติศาสตร์">ประวัติศาสตร์</option>
+              <option value="ตลาด">ตลาด</option>
+              <option value="ทะเล">ทะเล</option>
+              <option value="คาเฟ่">คาเฟ่</option>
+              <option value="พักผ่อนหย่อนใจ" selected>พักผ่อนหย่อนใจ</option>
+            </select>
+          </div>
+        </div>
+        
+        <!-- GPS Coordinates Section -->
+        <div class="form-group">
+          <label>พิกัด GPS แม่นยำ (ละติจูด, ลองจิจูด)</label>
+          <button type="button" class="btn-gps" id="fetchGpsBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
+            <span>📍 ดึงพิกัด GPS ปัจจุบันของคุณ (High Accuracy)</span>
+          </button>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <input type="number" step="any" id="pinLat" class="form-control" placeholder="Latitude (เช่น 15.1185)">
+            <input type="number" step="any" id="pinLng" class="form-control" placeholder="Longitude (เช่น 104.3228)">
+          </div>
+        </div>
+
+        <!-- Recommended Tags Section -->
+        <div class="form-group">
+          <label>ติดแท็กแนะนำในรูปภาพ</label>
+          <select id="pinTag" class="form-control" style="background:#091424; color:#fff;">
+            <option value="📸 จุดถ่ายรูปสวย" selected>📸 จุดถ่ายรูปสวย</option>
+            <option value="✨ มุมไฮไลท์">✨ มุมไฮไลท์</option>
+            <option value="☕ กาแฟแนะนำ">☕ กาแฟแนะนำ</option>
+            <option value="🌿 บรรยากาศดี">🌿 บรรยากาศดี</option>
+            <option value="🌊 วิวสวยตระการตา">🌊 วิวสวยตระการตา</option>
+            <option value="📍 พิกัดน่าเที่ยว">📍 พิกัดน่าเที่ยว</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>คำอธิบายสถานที่</label>
+          <textarea id="pinDesc" class="form-control" rows="3" placeholder="ระบุรายละเอียด เช่น ไฮไลท์การท่องเที่ยว อาหารจานเด็ด บรรยากาศ"></textarea>
+        </div>
+        <div class="form-group">
+          <label>อัปโหลดรูปภาพสถานที่</label>
+          <input type="file" id="pinImage" class="form-control" accept="image/*">
+        </div>
+        <button type="submit" class="btn-submit">ปักหมุดสถานที่นี้เลย ✨</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Delete Confirm Modal -->
+  <div class="custom-modal" id="deleteConfirmModal">
+    <div class="modal-backdrop" id="closeDeleteModalBackdrop"></div>
+    <div class="modal-box" style="max-width:400px; text-align:center;">
+      <div style="font-size:40px; margin-bottom:12px;">🗑️</div>
+      <h3 style="margin-bottom:8px; color:#f87171;">ยืนยันการลบจุดปักหมุด</h3>
+      <p id="deleteModalMessage" style="font-size:14px; color:#94a3b8; margin-bottom:20px; line-height:1.5;"></p>
+      <div style="display:flex; gap:10px; justify-content:center;">
+        <button class="btn-gps" id="cancelDeleteBtn" style="background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.1); color:#94a3b8;">ยกเลิก</button>
+        <button class="btn-submit" id="confirmDeleteBtn" style="background:#ef4444; border-color:#dc2626; margin-top:0;">ลบถาวร</button>
+      </div>
+    </div>
+  </div>
+
   <script>
-    const places = [
+        const places = [
       {
-        id: 'srikam', name: 'ปราสาทสระกำแพงใหญ่', province: 'ศรีสะเกษ', category: 'ประวัติศาสตร์',
-        desc: 'ปราสาทหินขอมกลางเมือง เงียบสงบและคนไม่พลุกพล่านเท่าปราสาทหินชื่อดังแห่งอื่น'
+        id: 'srikam', name: 'ปราสาทสระกำแพงใหญ่', province: 'ศรีสะเกษ', district: 'อุทุมพรพิสัย', village: 'บ้านกำแพง ต.กำแพง', category: 'ประวัติศาสตร์',
+        desc: 'ปราสาทหินขอมกลางเมือง เงียบสงบและคนไม่พลุกพล่านเท่าปราสาทหินชื่อดังแห่งอื่น',
+        latitude: 15.1118, longitude: 104.1378, distance_km: 23.8
       },
       {
-        id: 'phanomrung', name: 'ปราสาทหินพนมรุ้ง', province: 'บุรีรัมย์', category: 'ประวัติศาสตร์',
-        desc: 'ปราสาทหินบนยอดภูเขาไฟดับ ช่วงที่แสงอาทิตย์ส่องตรงประตูทั้ง 15 บานคือวันที่คนแน่นที่สุด'
+        id: 'phanomrung', name: 'ปราสาทหินพนมรุ้ง', province: 'บุรีรัมย์', district: 'เฉลิมพระเกียรติ', village: 'ต.ตาเป๊ก', category: 'ประวัติศาสตร์',
+        desc: 'ปราสาทหินบนยอดภูเขาไฟดับ ช่วงที่แสงอาทิตย์ส่องตรงประตูทั้ง 15 บานคือวันที่คนแน่นที่สุด',
+        distance_km: 158.0
       },
       {
-        id: 'khaophrawihan', name: 'อุทยานแห่งชาติเขาพระวิหาร', province: 'ศรีสะเกษ', category: 'ธรรมชาติ',
-        desc: 'ยืนบนหน้าผาสูงแล้วมองเห็นที่ราบกัมพูชาทอดยาวสุดลูกหูลูกตา'
+        id: 'khaophrawihan', name: 'อุทยานแห่งชาติเขาพระวิหาร', province: 'ศรีสะเกษ', district: 'กันทรลักษ์', village: 'บ้านภูมิซรอล ต.เสาธงชัย', category: 'ธรรมชาติ',
+        desc: 'ยืนบนหน้าผาสูงแล้วมองเห็นที่ราบกัมพูชาทอดยาวสุดลูกหูลูกตา',
+        latitude: 14.3941, longitude: 104.7077, distance_km: 98.0
       },
       {
-        id: 'doisuthep', name: 'วัดพระธาตุดอยสุเทพ', province: 'เชียงใหม่', category: 'วัด',
-        desc: 'วัดบนดอยที่มองเห็นตัวเมืองเชียงใหม่ทั้งเมือง ต้องเดินขึ้นบันไดนาคหลายร้อยขั้น'
+        id: 'doisuthep', name: 'วัดพระธาตุดอยสุเทพ', province: 'เชียงใหม่', district: 'เมืองเชียงใหม่', village: 'ต.สุเทพ', category: 'วัด',
+        desc: 'วัดบนดอยที่มองเห็นตัวเมืองเชียงใหม่ทั้งเมือง ต้องเดินขึ้นบันไดนาคหลายร้อยขั้น',
+        distance_km: 850.0
       },
       {
-        id: 'rongkhun', name: 'วัดร่องขุ่น', province: 'เชียงราย', category: 'วัด',
-        desc: 'วัดสีขาวที่ทุกรายละเอียดแกะสลักด้วยมือ ออกแบบโดยอาจารย์เฉลิมชัย โฆษิตพิพัฒน์'
+        id: 'rongkhun', name: 'วัดร่องขุ่น', province: 'เชียงราย', district: 'เมืองเชียงราย', village: 'ต.ป่าอ้อดอนชัย', category: 'วัด',
+        desc: 'วัดสีขาวที่ทุกรายละเอียดแกะสลักด้วยมือ ออกแบบโดยอาจารย์เฉลิมชัย โฆษิตพิพัฒน์',
+        distance_km: 920.0
       },
       {
-        id: 'khaoyai', name: 'เขาใหญ่', province: 'นครราชสีมา', category: 'ธรรมชาติ',
-        desc: 'ผืนป่ามรดกโลกที่มีทั้งช้างป่า น้ำตก และอากาศเย็นสบายเกือบตลอดทั้งปี'
+        id: 'khaoyai', name: 'เขาใหญ่', province: 'นครราชสีมา', district: 'ปากช่อง', village: 'ต.หมูสี', category: 'ธรรมชาติ',
+        desc: 'ผืนป่ามรดกโลกที่มีทั้งช้างป่า น้ำตก และอากาศเย็นสบายเกือบตลอดทั้งปี',
+        distance_km: 380.0
       },
       {
-        id: 'phiphi', name: 'เกาะพีพี', province: 'กระบี่', category: 'ทะเล',
-        desc: 'หมู่เกาะน้ำใสสีเทอร์ควอยซ์ที่แทบทุกมุมกลายเป็นจุดถ่ายรูปได้'
+        id: 'phiphi', name: 'เกาะพีพี', province: 'กระบี่', district: 'เมืองกระบี่', village: 'ต.อ่าวนาง', category: 'ทะเล',
+        desc: 'หมู่เกาะน้ำใสสีเทอร์ควอยซ์ที่แทบทุกมุมกลายเป็นจุดถ่ายรูปได้',
+        distance_km: 1280.0
       },
       {
-        id: 'maya', name: 'อ่าวมาหยา', province: 'กระบี่', category: 'ทะเล',
-        desc: 'อ่าวเล็กที่ล้อมรอบด้วยหน้าผาหินปูนสูงชัน โด่งดังไปทั่วโลกจากภาพยนตร์ฮอลลีวูด'
+        id: 'maya', name: 'อ่าวมาหยา', province: 'กระบี่', district: 'เมืองกระบี่', village: 'เกาะพีพีเล ต.อ่าวนาง', category: 'ทะเล',
+        desc: 'อ่าวเล็กที่ล้อมรอบด้วยหน้าผาหินปูนสูงชัน โด่งดังไปทั่วโลกจากภาพยนตร์ฮอลลีวูด',
+        distance_km: 1290.0
       },
       {
-        id: 'damnoen', name: 'ตลาดน้ำดำเนินสะดวก', province: 'ราชบุรี', category: 'ตลาด',
-        desc: 'ตลาดน้ำเก่าแก่ที่พ่อค้าแม่ค้ายังพายเรือขายของสดและของกินกลางคลอง'
+        id: 'damnoen', name: 'ตลาดน้ำดำเนินสะดวก', province: 'ราชบุรี', district: 'ดำเนินสะดวก', village: 'ต.ดำเนินสะดวก', category: 'ตลาด',
+        desc: 'ตลาดน้ำเก่าแก่ที่พ่อค้าแม่ค้ายังพายเรือขายของสดและของกินกลางคลอง',
+        distance_km: 620.0
       },
       {
-        id: 'samchuk', name: 'ตลาดร้อยปีสามชุก', province: 'สุพรรณบุรี', category: 'ตลาด',
-        desc: 'ชุมชนเก่าริมแม่น้ำท่าจีน เก็บอาคารไม้สมัยรัชกาลที่ 5 ไว้เกือบครบทั้งตลาด'
+        id: 'samchuk', name: 'ตลาดร้อยปีสามชุก', province: 'สุพรรณบุรี', district: 'สามชุก', village: 'ต.สามชุก', category: 'ตลาด',
+        desc: 'ชุมชนเก่าริมแม่น้ำท่าจีน เก็บอาคารไม้สมัยรัชกาลที่ 5 ไว้เกือบครบทั้งตลาด',
+        distance_km: 550.0
       },
       {
-        id: 'srinakarin', name: 'เขื่อนศรีนครินทร์', province: 'กาญจนบุรี', category: 'ธรรมชาติ',
-        desc: 'อ่างเก็บน้ำขนาดใหญ่ล้อมด้วยภูเขา นิยมล่องแพไม้ไผ่พักค้างคืนกลางน้ำ'
+        id: 'srinakarin', name: 'เขื่อนศรีนครินทร์', province: 'กาญจนบุรี', district: 'ศรีสวัสดิ์', village: 'ต.ท่ากระดาน', category: 'ธรรมชาติ',
+        desc: 'อ่างเก็บน้ำขนาดใหญ่ล้อมด้วยภูเขา นิยมล่องแพไม้ไผ่พักค้างคืนกลางน้ำ',
+        distance_km: 680.0
       },
       {
-        id: 'kwai', name: 'สะพานข้ามแม่น้ำแคว', province: 'กาญจนบุรี', category: 'ประวัติศาสตร์',
-        desc: 'สะพานประวัติศาสตร์จากยุคสงครามโลกครั้งที่สอง เดินข้ามได้จริงระหว่างขบวนรถไฟ'
+        id: 'kwai', name: 'สะพานข้ามแม่น้ำแคว', province: 'กาญจนบุรี', district: 'เมืองกาญจนบุรี', village: 'ต.ท่ามะขาม', category: 'ประวัติศาสตร์',
+        desc: 'สะพานประวัติศาสตร์จากยุคสงครามโลกครั้งที่สอง เดินข้ามได้จริงระหว่างขบวนรถไฟ',
+        distance_km: 660.0
       },
       {
-        id: 'sukhothai', name: 'อุทยานประวัติศาสตร์สุโขทัย', province: 'สุโขทัย', category: 'ประวัติศาสตร์',
-        desc: 'เมืองเก่าราชธานีแห่งแรกของไทย ปั่นจักรยานชมซากโบราณสถานได้เกือบทั้งวัน'
+        id: 'sukhothai', name: 'อุทยานประวัติศาสตร์สุโขทัย', province: 'สุโขทัย', district: 'เมืองสุโขทัย', village: 'ต.เมืองเก่า', category: 'ประวัติศาสตร์',
+        desc: 'เมืองเก่าราชธานีแห่งแรกของไทย ปั่นจักรยานชมซากโบราณสถานได้เกือบทั้งวัน',
+        distance_km: 640.0
       },
       {
-        id: 'inthanon', name: 'ดอยอินทนนท์', province: 'เชียงใหม่', category: 'ธรรมชาติ',
-        desc: 'ยอดเขาสูงสุดของประเทศไทย อากาศหนาวเย็นได้ตลอดทั้งปีแม้ในหน้าร้อน'
+        id: 'inthanon', name: 'ดอยอินทนนท์', province: 'เชียงใหม่', district: 'จอมทอง', village: 'ต.บ้านหลวง', category: 'ธรรมชาติ',
+        desc: 'ยอดเขาสูงสุดของประเทศไทย อากาศหนาวเย็นได้ตลอดทั้งปีแม้ในหน้าร้อน',
+        distance_km: 880.0
       },
       {
-        id: 'railay', name: 'หาดไร่เลย์', province: 'กระบี่', category: 'ทะเล',
-        desc: 'หาดที่เข้าถึงได้ทางเรือเท่านั้น ล้อมรอบด้วยหน้าผาปีนเขาที่มีชื่อเสียงระดับโลก'
+        id: 'railay', name: 'หาดไร่เลย์', province: 'กระบี่', district: 'เมืองกระบี่', village: 'ต.อ่าวนาง', category: 'ทะเล',
+        desc: 'หาดที่เข้าถึงได้ทางเรือเท่านั้น ล้อมรอบด้วยหน้าผาปีนเขาที่มีชื่อเสียงระดับโลก',
+        distance_km: 1270.0
       },
       {
-        id: 'watnonkaed', name: 'วัดโนนแกด (วัดศรีธาตุ)', province: 'ศรีสะเกษ', category: 'วัด',
-        desc: 'วัดร่มรื่นริมเส้นทางศรีสะเกษ–กันทรลักษ์ มีพระธาตุบ้านโนนแกดและสรีระสังขารหลวงปู่เกลี้ยงให้สักการะ'
+        id: 'watnonkaed', name: 'วัดโนนแกด (วัดศรีธาตุ)', province: 'ศรีสะเกษ', district: 'เมืองศรีสะเกษ', village: 'บ้านโนนแกด ต.ทุ่ม', category: 'วัด',
+        desc: 'วัดร่มรื่นริมเส้นทางศรีสะเกษ–กันทรลักษ์ มีพระธาตุบ้านโนนแกดและสรีระสังขารหลวงปู่เกลี้ยงให้สักการะ',
+        latitude: 15.0442, longitude: 104.3821, distance_km: 12.5
       },
       {
-        id: 'phrathatreungrong', name: 'พระธาตุเรืองรอง', province: 'ศรีสะเกษ', category: 'วัด',
-        desc: 'ศาสนสถานศิลปะพื้นบ้านอีสานใต้ สูง 6 ชั้น พร้อมพิพิธภัณฑ์และจุดชมทัศนียภาพเมืองศรีสะเกษ'
+        id: 'phrathatreungrong', name: 'พระธาตุเรืองรอง', province: 'ศรีสะเกษ', district: 'เมืองศรีสะเกษ', village: 'บ้านสร้างเรือง ต.หญ้าปล้อง', category: 'วัด',
+        desc: 'ศาสนสถานศิลปะพื้นบ้านอีสานใต้ สูง 6 ชั้น พร้อมพิพิธภัณฑ์และจุดชมทัศนียภาพเมืองศรีสะเกษ',
+        latitude: 15.1764, longitude: 104.3006, distance_km: 7.6
       },
       {
-        id: 'watphratatsuphanhong', name: 'วัดพระธาตุสุพรรณหงส์', province: 'ศรีสะเกษ', category: 'วัด',
-        desc: 'โดดเด่นด้วยพระอุโบสถทรงเรือสุพรรณหงส์จำลองกลางน้ำ และบันไดพญานาคสีเขียว'
+        id: 'watphratatsuphanhong', name: 'วัดพระธาตุสุพรรณหงส์', province: 'ศรีสะเกษ', district: 'เมืองศรีสะเกษ', village: 'บ้านหว้าน ต.น้ำคำ', category: 'วัด',
+        desc: 'โดดเด่นด้วยพระอุโบสถทรงเรือสุพรรณหงส์จำลองกลางน้ำ และบันไดพญานาคสีเขียว',
+        latitude: 15.0885, longitude: 104.2541, distance_km: 8.2
       },
       {
-        id: 'ryurarin', name: 'ริวระริน คาเฟ่', province: 'ศรีสะเกษ', category: 'คาเฟ่',
-        desc: 'คาเฟ่สวนบรรยากาศร่มรื่น มีลำธาร น้ำตกจำลอง บ่อปลาคาร์ป และมุมถ่ายรูปหลากหลาย'
+        id: 'ryurarin', name: 'ริวระริน คาเฟ่', province: 'ศรีสะเกษ', district: 'เมืองศรีสะเกษ', village: 'ต.หนองครก', category: 'คาเฟ่',
+        desc: 'คาเฟ่สวนบรรยากาศร่มรื่น มีลำธาร น้ำตกจำลอง บ่อปลาคาร์ป และมุมถ่ายรูปหลากหลาย',
+        latitude: 15.0975, longitude: 104.3168, distance_km: 2.4
       },
       {
-        id: 'caffeinehouse', name: 'Caffeine House & Roaster', province: 'ศรีสะเกษ', category: 'คาเฟ่',
-        desc: 'คาเฟ่บรรยากาศอบอุ่นสำหรับพักจิบกาแฟ มีทั้งมุมในร้านและพื้นที่สีเขียวด้านนอก'
+        id: 'caffeinehouse', name: 'Caffeine House & Roaster', province: 'ศรีสะเกษ', district: 'เมืองศรีสะเกษ', village: 'ต.เมืองเหนือ', category: 'คาเฟ่',
+        desc: 'คาเฟ่บรรยากาศอบอุ่นสำหรับพักจิบกาแฟ มีทั้งมุมในร้านและพื้นที่สีเขียวด้านนอก',
+        latitude: 15.1192, longitude: 104.3245, distance_km: 0.2
       },
       {
-        id: 'lanaodlod', name: 'สวนสาธารณะลานออดหลอด', province: 'ศรีสะเกษ', category: 'พักผ่อนหย่อนใจ',
-        desc: 'พื้นที่พักผ่อนริมห้วยสำราญ ใกล้สะพานขาว มีสวนหย่อม จุดนั่งเล่น และเครื่องออกกำลังกาย'
+        id: 'lanaodlod', name: 'สวนสาธารณะลานออดหลอด', province: 'ศรีสะเกษ', district: 'เมืองศรีสะเกษ', village: 'ต.เมืองใต้', category: 'พักผ่อนหย่อนใจ',
+        desc: 'พื้นที่พักผ่อนริมห้วยสำราญ ใกล้สะพานขาว มีสวนหย่อม จุดนั่งเล่น และเครื่องออกกำลังกาย',
+        latitude: 15.1120, longitude: 104.3210, distance_km: 0.8
       },
       {
-        id: 'suansomdet', name: 'สวนสมเด็จพระศรีนครินทร์ ศรีสะเกษ', province: 'ศรีสะเกษ', category: 'พักผ่อนหย่อนใจ',
-        desc: 'สวนสาธารณะสำหรับเดินเล่นและพักผ่อน โดดเด่นด้วยต้นลำดวนจำนวนมากและเทศกาลดอกลำดวนบาน'
+        id: 'suansomdet', name: 'สวนสมเด็จพระศรีนครินทร์ ศรีสะเกษ', province: 'ศรีสะเกษ', district: 'เมืองศรีสะเกษ', village: 'ต.หนองครก', category: 'พักผ่อนหย่อนใจ',
+        desc: 'สวนสาธารณะสำหรับเดินเล่นและพักผ่อน โดดเด่นด้วยต้นลำดวนจำนวนมากและเทศกาลดอกลำดวนบาน',
+        latitude: 15.1012, longitude: 104.3125, distance_km: 2.2
       },
       {
-        id: 'huainamkham', name: 'เกาะกลางน้ำห้วยน้ำคำ', province: 'ศรีสะเกษ', category: 'พักผ่อนหย่อนใจ',
-        desc: 'สวนสาธารณะกลางอ่างเก็บน้ำ เหมาะกับการเดิน วิ่ง ปั่นจักรยาน และชมบรรยากาศเมืองยามเย็น'
-      },
+        id: 'huainamkham', name: 'เกาะกลางน้ำห้วยน้ำคำ', province: 'ศรีสะเกษ', district: 'เมืองศรีสะเกษ', village: 'ต.หนองครก', category: 'พักผ่อนหย่อนใจ',
+        desc: 'สวนสาธารณะกลางอ่างเก็บน้ำ เหมาะกับการเดิน วิ่ง ปั่นจักรยาน และชมบรรยากาศเมืองยามเย็น',
+        latitude: 15.0964, longitude: 104.3142, distance_km: 2.6
+      }
     ];
+
+    
+    // Sisaket City Center Coordinates (ศาลากลางจังหวัดศรีสะเกษ / ศาลหลักเมืองศรีสะเกษ)
+    const SISAKET_CENTER = { lat: 15.1185, lng: 104.3228 };
+
+    function calculateDistanceKm(lat1, lon1, lat2, lon2) {
+      const R = 6371; // Earth radius in km
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      const dist = R * c;
+      return Math.round((dist * 1.15) * 10) / 10;
+    }
+
+    function getSisaketDistanceInfo(p) {
+      let km = null;
+      if (p.distance_km !== undefined && p.distance_km !== null) {
+        km = p.distance_km;
+      } else if (p.latitude && p.longitude) {
+        km = calculateDistanceKm(SISAKET_CENTER.lat, SISAKET_CENTER.lng, parseFloat(p.latitude), parseFloat(p.longitude));
+      }
+
+      if (km === null) {
+        return { text: 'ไม่ทราบระยะทาง', km: null };
+      }
+
+      if (km <= 1.5 && (p.province === 'ศรีสะเกษ' || !p.province)) {
+        return { text: `อยู่ในตัวเมืองศรีสะเกษ (~${km} กม.)`, km: km };
+      } else {
+        return { text: `ห่างจากตัวเมืองศรีสะเกษ ~${km} กม.`, km: km };
+      }
+    }
 
     const placeHistories = {
       srikam: 'ปราสาทหินขอมแห่งนี้สร้างขึ้นราวพุทธศตวรรษที่ 16–17 เป็นศาสนสถานสำคัญของชุมชนโบราณในแถบอีสานใต้ ก่อนพัฒนาเป็นเมืองในเวลาต่อมา',
@@ -1948,11 +2462,18 @@
       <div class="dialog-eyebrow">PLACE STORY · ${place.province}</div>
       <h2 class="dialog-title" id="dialogTitle">${place.name}</h2>
     </div>`;
-      document.getElementById('dialogContent').innerHTML = `
+    const distInfo = getSisaketDistanceInfo(place);
+    const districtStr = place.district ? `อ.${place.district.replace(/^อ\./,'')}` : '-';
+    const villageStr = place.village || '-';
+
+    document.getElementById('dialogContent').innerHTML = `
     <div class="history-label">ประวัติสถานที่</div>
     <p class="history-copy">${placeHistories[id] || place.desc}</p>
     <div class="history-facts">
       <div class="history-fact"><span>จังหวัด</span><b>${place.province}</b></div>
+      <div class="history-fact"><span>อำเภอ</span><b>${districtStr}</b></div>
+      <div class="history-fact"><span>ตำบล / หมู่บ้าน</span><b>${villageStr}</b></div>
+      <div class="history-fact"><span>ระยะทางจากเมืองศรีสะเกษ</span><b style="color:#38bdf8;">${distInfo.text}</b></div>
       <div class="history-fact"><span>สถานะของคุณ</span><b>${checkins[id] ? 'เช็คอินแล้ว' : 'รอให้คุณไปเยือน'}</b></div>
     </div>
     <div class="history-tip">✦ เลือกเช็คอินเพื่อบันทึกว่าสถานที่นี้อยู่ในเส้นทางการเดินทางของคุณ</div>
@@ -2038,13 +2559,288 @@
       document.body.style.overflow = '';
     }
 
+    // Toast Notification System
+    function showToast(message, icon = '✨') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerHTML = `<span>${icon}</span><span>${message}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 3200);
+    }
+
+    // Auth State & Management
+    let currentUser = null;
+    async function fetchMe() {
+      try {
+        const res = await fetch('/api/me/');
+        const data = await res.json();
+        if (data.authenticated) {
+          currentUser = data.user;
+          profileName = data.user.display_name || data.user.username;
+        } else {
+          currentUser = null;
+        }
+        updateNavIdentity();
+      } catch (e) {
+        currentUser = null;
+      }
+    }
+
+    function updateNavIdentity() {
+      const label = profileName.trim() || 'ผู้เยี่ยมชม';
+      document.getElementById('navName').textContent = label;
+      document.getElementById('navAvatar').textContent = initialOf(label);
+      document.getElementById('navAvatar').style.background = colorFor(label);
+      document.getElementById('nameInput').value = profileName;
+    }
+
+    // Auth Modal Handlers
+    const authModal = document.getElementById('authModal');
+    document.getElementById('navProfile').addEventListener('click', () => {
+      if (currentUser) {
+        if (confirm(`คุณเข้าสู่ระบบในชื่อ "${currentUser.display_name}" ต้องการออกจากระบบหรือไม่?`)) {
+          fetch('/api/logout/', { method: 'POST' }).then(() => {
+            currentUser = null;
+            profileName = '';
+            showToast('ออกจากระบบเรียบร้อยแล้ว', '👋');
+            updateNavIdentity();
+            render();
+          });
+        }
+      } else {
+        authModal.classList.add('open');
+      }
+    });
+
+    document.getElementById('closeAuthModalBtn').addEventListener('click', () => authModal.classList.remove('open'));
+    document.getElementById('closeAuthModalBackdrop').addEventListener('click', () => authModal.classList.remove('open'));
+
+    const tabLogin = document.getElementById('tabLogin');
+    const tabRegister = document.getElementById('tabRegister');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const authError = document.getElementById('authError');
+
+    tabLogin.addEventListener('click', () => {
+      tabLogin.style.background = 'rgba(16, 185, 129, 0.15)';
+      tabLogin.style.borderColor = 'rgba(16, 185, 129, 0.35)';
+      tabLogin.style.color = '#34d399';
+      tabRegister.style.background = 'rgba(255,255,255,0.06)';
+      tabRegister.style.borderColor = 'rgba(255,255,255,0.1)';
+      tabRegister.style.color = '#94a3b8';
+      loginForm.style.display = 'block';
+      registerForm.style.display = 'none';
+      authError.style.display = 'none';
+    });
+
+    tabRegister.addEventListener('click', () => {
+      tabRegister.style.background = 'rgba(16, 185, 129, 0.15)';
+      tabRegister.style.borderColor = 'rgba(16, 185, 129, 0.35)';
+      tabRegister.style.color = '#34d399';
+      tabLogin.style.background = 'rgba(255,255,255,0.06)';
+      tabLogin.style.borderColor = 'rgba(255,255,255,0.1)';
+      tabLogin.style.color = '#94a3b8';
+      registerForm.style.display = 'block';
+      loginForm.style.display = 'none';
+      authError.style.display = 'none';
+    });
+
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      authError.style.display = 'none';
+      const username = document.getElementById('loginUsername').value;
+      const password = document.getElementById('loginPassword').value;
+
+      try {
+        const res = await fetch('/api/login/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+        const data = await res.json();
+        if (data.success) {
+          currentUser = data.user;
+          profileName = data.user.display_name || data.user.username;
+          showToast(`ยินดีต้อนรับคุณ ${profileName}! 🎉`, '🔑');
+          authModal.classList.remove('open');
+          updateNavIdentity();
+          render();
+        } else {
+          authError.textContent = data.error || 'การเข้าสู่ระบบล้มเหลว';
+          authError.style.display = 'block';
+        }
+      } catch (err) {
+        authError.textContent = 'ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้';
+        authError.style.display = 'block';
+      }
+    });
+
+    registerForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      authError.style.display = 'none';
+      const username = document.getElementById('regUsername').value;
+      const display_name = document.getElementById('regDisplayName').value;
+      const password = document.getElementById('regPassword').value;
+
+      try {
+        const res = await fetch('/api/register/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password, display_name })
+        });
+        const data = await res.json();
+        if (data.success) {
+          currentUser = data.user;
+          profileName = data.user.display_name || data.user.username;
+          showToast(`สมัครสมาชิกและเข้าสู่ระบบสำเร็จ! 🎉`, '✨');
+          authModal.classList.remove('open');
+          updateNavIdentity();
+          render();
+        } else {
+          authError.textContent = data.error || 'การลงทะเบียนล้มเหลว';
+          authError.style.display = 'block';
+        }
+      } catch (err) {
+        authError.textContent = 'ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้';
+        authError.style.display = 'block';
+      }
+    });
+
+    // Add Pin Modal & GPS Logic
+    const addPinModal = document.getElementById('addPinModal');
+    document.getElementById('openAddPinBtn').addEventListener('click', () => {
+      addPinModal.classList.add('open');
+    });
+    document.getElementById('closeAddPinBtn').addEventListener('click', () => addPinModal.classList.remove('open'));
+    document.getElementById('closeAddPinBackdrop').addEventListener('click', () => addPinModal.classList.remove('open'));
+
+    // High-Accuracy GPS Geolocation
+    document.getElementById('fetchGpsBtn').addEventListener('click', () => {
+      if (!navigator.geolocation) {
+        return showToast('อุปกรณ์หรือเบราว์เซอร์ของคุณไม่รองรับ GPS', '⚠️');
+      }
+      showToast('กำลังค้นหาพิกัด GPS แม่นยำ...', '📍');
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const lat = pos.coords.latitude.toFixed(6);
+          const lng = pos.coords.longitude.toFixed(6);
+          document.getElementById('pinLat').value = lat;
+          document.getElementById('pinLng').value = lng;
+          showToast(`จับพิกัดแม่นยำสำเร็จ: ${lat}, ${lng}`, '✅');
+        },
+        (err) => {
+          showToast('ไม่สามารถดึงพิกัด GPS ได้: ' + err.message, '⚠️');
+        },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      );
+    });
+
+    // Create Pin Form Submission
+    document.getElementById('createPinForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append('name', document.getElementById('pinName').value);
+      formData.append('province', document.getElementById('pinProvince').value);
+      formData.append('district', document.getElementById('pinDistrict').value);
+      formData.append('village', document.getElementById('pinVillage').value);
+      formData.append('category', document.getElementById('pinCategory').value);
+      formData.append('latitude', document.getElementById('pinLat').value);
+      formData.append('longitude', document.getElementById('pinLng').value);
+      formData.append('recommended_tags', document.getElementById('pinTag').value);
+      formData.append('description', document.getElementById('pinDesc').value);
+
+      const fileInput = document.getElementById('pinImage');
+      if (fileInput.files[0]) {
+        formData.append('image', fileInput.files[0]);
+      }
+
+      try {
+        const res = await fetch('/api/pins/', { method: 'POST', body: formData });
+        const data = await res.json();
+        if (data.success) {
+          showToast('ปักหมุดสถานที่ใหม่สำเร็จเรียบร้อย! 🎉', '📍');
+          addPinModal.classList.remove('open');
+          document.getElementById('createPinForm').reset();
+          await fetchDbPins();
+        } else {
+          showToast(data.error || 'เกิดข้อผิดพลาดในการปักหมุด', '⚠️');
+        }
+      } catch (err) {
+        showToast('ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้', '⚠️');
+      }
+    });
+
+    let dbPins = [];
+    async function fetchDbPins() {
+      try {
+        const res = await fetch('/api/pins/');
+        const data = await res.json();
+        if (data.pins) {
+          dbPins = data.pins;
+          // Merge dbPins into places array cleanly
+          dbPins.forEach(dbPin => {
+            const idx = places.findIndex(p => p.id === dbPin.id || p.id === 'db_' + dbPin.db_id);
+            const formatted = {
+              id: 'db_' + dbPin.db_id,
+              db_id: dbPin.db_id,
+              name: dbPin.name,
+              province: dbPin.province,
+              category: dbPin.category,
+              desc: dbPin.desc,
+              latitude: dbPin.latitude,
+              longitude: dbPin.longitude,
+              image: dbPin.image,
+              recommended_tags: dbPin.recommended_tags,
+              is_db: true
+            };
+            if (idx >= 0) places[idx] = formatted;
+            else places.unshift(formatted);
+
+            likeCounts['db_' + dbPin.db_id] = dbPin.likes;
+            comments['db_' + dbPin.db_id] = dbPin.comments;
+            if (dbPin.is_liked) likedByMe['db_' + dbPin.db_id] = true;
+            if (dbPin.is_checked) checkins['db_' + dbPin.db_id] = dbPin.created_at;
+          });
+          render();
+        }
+      } catch (e) {
+        console.error('Error fetching DB pins:', e);
+      }
+    }
+
     function renderPost(p) {
       const isChecked = !!checkins[p.id];
       const isLiked = !!likedByMe[p.id];
       const likeCount = likeCounts[p.id] || 0;
       const placeComments = comments[p.id] || [];
       const isOpen = !!openComments[p.id];
-      const meta = categoryMeta[p.category];
+      const meta = categoryMeta[p.category] || categoryMeta['พักผ่อนหย่อนใจ'];
+
+      // Photo Recommendation Tag
+      const photoTag = p.recommended_tags || (
+        p.category === 'วัด' ? '📸 จุดถ่ายรูปสวย' :
+        p.category === 'คาเฟ่' ? '☕ กาแฟแนะนำ' :
+        p.category === 'ธรรมชาติ' ? '🌿 บรรยากาศดี' :
+        p.category === 'ประวัติศาสตร์' ? '✨ มุมไฮไลท์' :
+        p.category === 'ทะเล' ? '🌊 วิวสวยตระการตา' : '📍 พิกัดน่าเที่ยว'
+      );
+
+      // Precise Coordinates Pill & Google Maps URL
+      let coordsHtml = '';
+      let mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${p.name} ${p.province} ประเทศไทย`)}`;
+      if (p.latitude && p.longitude) {
+        coordsHtml = `<div class="coords-pill">📍 Lat: ${p.latitude}, Lng: ${p.longitude}</div>`;
+        mapsUrl = `https://www.google.com/maps?q=${p.latitude},${p.longitude}`;
+      }
+
+      // Background Image styling
+      const coverImg = p.image || meta.img;
 
       const commentsHtml = placeComments.length
         ? placeComments.map(c => `
@@ -2052,7 +2848,7 @@
           <div class="comment-avatar" style="background:${colorFor(c.name)};">${initialOf(c.name)}</div>
           <div>
             <div class="comment-bubble">
-              <div class="cname">${c.name}</div>
+              <div class="cname">${c.name} ${c.emoji ? `<span style="font-size:14px; margin-left:4px;">${c.emoji}</span>` : ''}</div>
               <div class="ctext">${c.text}</div>
             </div>
             <div class="comment-time">${formatTime(c.ts)}</div>
@@ -2060,16 +2856,28 @@
         </div>`).join('')
         : `<div class="comment-empty">ยังไม่มีความคิดเห็น เป็นคนแรกที่พูดถึงที่นี่สิ</div>`;
 
+      const distInfo = getSisaketDistanceInfo(p);
+      let locParts = [];
+      if (p.village) locParts.push(p.village);
+      if (p.district) locParts.push(`อ.${p.district.replace(/^อ\./,'')}`);
+      if (p.province) locParts.push(`จ.${p.province}`);
+      const locText = locParts.join(', ');
+
       return `
   <div class="post" data-place="${p.id}" role="button" tabindex="0" aria-label="ดูประวัติ ${p.name}">
     <div class="post-head">
       <div class="post-avatar" style="background:${meta.color}22;">${iconSvg(p.category)}</div>
       <div class="post-titles">
         <div class="name">${p.name}</div>
-        <div class="meta">${ICONS.pinBtn}<span>${p.province}</span></div>
+        <div class="location-details">
+          <span class="loc-pill">📍 ${locText}</span>
+          <span class="dist-pill">🚗 ${distInfo.text}</span>
+        </div>
+        ${coordsHtml}
       </div>
     </div>
-    <div class="post-cover" style="background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.45)), url('${meta.img}'); background-size: cover; background-position: center;">
+    <div class="post-cover" style="position:relative; background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.45)), url('${coverImg}'); background-size: cover; background-position: center;">
+      <div class="photo-tag-badge">${photoTag}</div>
       <div class="tagline">${p.province}</div>
     </div>
     <div class="post-body">${p.desc}</div>
@@ -2079,10 +2887,28 @@
       </div>
       <button data-toggle-comments="${p.id}">${placeComments.length > 0 ? placeComments.length + ' ความคิดเห็น' : 'แสดงความคิดเห็น'}</button>
     </div>
+
+    <!-- Quick Emoji Reaction Bar -->
+    <div class="emoji-bar">
+      <button class="emoji-btn" data-emoji="❤️" data-id="${p.id}">❤️ ได้ใจ</button>
+      <button class="emoji-btn" data-emoji="😍" data-id="${p.id}">😍 เลิฟเลย</button>
+      <button class="emoji-btn" data-emoji="📍" data-id="${p.id}">📍 พิกัดดี</button>
+      <button class="emoji-btn" data-emoji="🔥" data-id="${p.id}">🔥 ฮอตสุด</button>
+      <button class="emoji-btn" data-emoji="🌿" data-id="${p.id}">🌿 ชิลมาก</button>
+    </div>
+
     <div class="post-actions">
       <button class="action-btn ${isLiked ? 'liked' : ''}" data-like="${p.id}">${isLiked ? ICONS.thumbFilled : ICONS.thumb}<span>ถูกใจ</span></button>
       <button class="action-btn" data-toggle-comments="${p.id}">${ICONS.bubble}<span>ความคิดเห็น</span></button>
       <button class="action-btn ${isChecked ? 'checked' : ''}" data-checkin="${p.id}">${ICONS.pinBtn}<span>${isChecked ? 'เช็คอินแล้ว' : 'เช็คอิน'}</span></button>
+      <button class="share-btn" data-share="${p.id}" data-title="${p.name}" data-url="${mapsUrl}">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        <span>แชร์</span>
+      </button>
+      <button class="share-btn" style="color:#f87171;" data-delete-pin="${p.id}">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        <span>ลบปักหมุด</span>
+      </button>
     </div>
     ${isChecked ? `<div class="note">คุณเช็คอินที่นี่เมื่อ ${formatDate(checkins[p.id])}</div>` : ''}
     <div class="comments-section ${isOpen ? 'open' : ''}">
@@ -2102,7 +2928,7 @@
       const list = document.getElementById('suggestList');
       const unvisited = places.filter(p => !checkins[p.id]).slice(0, 4);
       list.innerHTML = unvisited.map(p => {
-        const meta = categoryMeta[p.category];
+        const meta = categoryMeta[p.category] || categoryMeta['พักผ่อนหย่อนใจ'];
         return `
     <div class="suggest-item">
       <div class="mini-badge" style="background:${meta.color}22;">${iconSvg(p.category)}</div>
@@ -2118,7 +2944,7 @@
     function render() {
       const term = searchTerm.trim().toLowerCase();
       const filtered = places.filter(p => {
-        const matchesSearch = !term || p.name.toLowerCase().includes(term) || p.province.toLowerCase().includes(term);
+        const matchesSearch = !term || p.name.toLowerCase().includes(term) || p.province.toLowerCase().includes(term) || (p.district && p.district.toLowerCase().includes(term)) || (p.village && p.village.toLowerCase().includes(term));
         const isChecked = !!checkins[p.id];
         const matchesStatus = activeStatus === 'all' || (activeStatus === 'checked' && isChecked) || (activeStatus === 'unvisited' && !isChecked);
         return matchesSearch && matchesStatus;
@@ -2136,9 +2962,195 @@
       renderSuggestions();
     }
 
+    // Check-in & Pin Actions
+    async function toggleCheckin(id) {
+      if (checkins[id]) {
+        delete checkins[id];
+        showToast('ยกเลิกการเช็คอินสถานที่เรียบร้อยแล้ว', '🗑️');
+      } else {
+        checkins[id] = new Date().toISOString();
+        showToast('เช็คอินสถานที่สำเร็จแล้ว! 📍', '✅');
+      }
+      if (id.startsWith('db_')) {
+        const dbId = id.replace('db_', '');
+        try {
+          await fetch(`/api/pins/${dbId}/checkin/`, { method: 'POST' });
+        } catch (e) {}
+      }
+      await saveJSON(KEYS.checkins, checkins, false);
+      render();
+    }
+
+    async function toggleLike(id) {
+      const current = likeCounts[id] || 0;
+      if (likedByMe[id]) {
+        likedByMe[id] = false;
+        likeCounts[id] = Math.max(0, current - 1);
+      } else {
+        likedByMe[id] = true;
+        likeCounts[id] = current + 1;
+      }
+      if (id.startsWith('db_')) {
+        const dbId = id.replace('db_', '');
+        try {
+          await fetch(`/api/pins/${dbId}/like/`, { method: 'POST' });
+        } catch (e) {}
+      }
+      await saveJSON(KEYS.likedByMe, likedByMe, false);
+      await saveJSON(`place_likes:${id}`, likeCounts[id], true);
+      render();
+    }
+
+    function toggleComments(id) {
+      openComments[id] = !openComments[id];
+      render();
+      if (openComments[id]) {
+        setTimeout(() => {
+          const input = document.querySelector(`.comment-text-input[data-id="${id}"]`);
+          if (input) input.focus();
+        }, 30);
+      }
+    }
+
+    async function submitComment(id) {
+      const input = document.querySelector(`.comment-text-input[data-id="${id}"]`);
+      if (!input) return;
+      const text = input.value.trim();
+      if (!text) return;
+      const name = profileName.trim() || 'ผู้เยี่ยมชม';
+      if (!comments[id]) comments[id] = [];
+
+      if (id.startsWith('db_')) {
+        const dbId = id.replace('db_', '');
+        try {
+          const res = await fetch(`/api/pins/${dbId}/comment/`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text, name })
+          });
+          const data = await res.json();
+          if (data.success) {
+            comments[id].push(data.comment);
+            showToast('แสดงความคิดเห็นเรียบร้อยแล้ว!', '💬');
+          }
+        } catch (e) {
+          comments[id].push({ name, text, ts: new Date().toISOString() });
+        }
+      } else {
+        comments[id].push({ name, text, ts: new Date().toISOString() });
+        await saveJSON(`place_comments:${id}`, comments[id], true);
+        showToast('แสดงความคิดเห็นเรียบร้อยแล้ว!', '💬');
+      }
+
+      input.value = '';
+      render();
+    }
+
+    // Custom Delete Confirmation Modal Logic
+    let pendingDeleteId = null;
+    let pendingDeleteName = '';
+
+    function openDeleteConfirmModal(id) {
+      const targetPlace = places.find(p => p.id === id);
+      const name = targetPlace ? targetPlace.name : 'สถานที่นี้';
+      pendingDeleteId = id;
+      pendingDeleteName = name;
+      document.getElementById('deleteModalMessage').innerHTML = 
+        `คุณต้องการลบจุดปักหมุด <b style="color:#fff;">"${name}"</b> ออกจากระบบจริงหรือไม่?<br><span style="color:#f87171; font-size:13px; display:inline-block; margin-top:6px;">⚠️ การกระทำนี้จะลบข้อมูลสถานที่ออกจากระบบถาวร</span>`;
+      document.getElementById('deleteConfirmModal').classList.add('open');
+    }
+
+    function closeDeleteConfirmModal() {
+      pendingDeleteId = null;
+      pendingDeleteName = '';
+      document.getElementById('deleteConfirmModal').classList.remove('open');
+    }
+
+    document.getElementById('cancelDeleteBtn').addEventListener('click', closeDeleteConfirmModal);
+    document.getElementById('closeDeleteModalBackdrop').addEventListener('click', closeDeleteConfirmModal);
+
+    document.getElementById('confirmDeleteBtn').addEventListener('click', async () => {
+      if (!pendingDeleteId) return;
+      const id = pendingDeleteId;
+      const name = pendingDeleteName;
+      closeDeleteConfirmModal();
+
+      if (id.startsWith('db_')) {
+        const dbId = id.replace('db_', '');
+        try {
+          const res = await fetch(`/api/pins/${dbId}/delete/`, { method: 'POST' });
+          const data = await res.json();
+          if (data.success) {
+            showToast(`ลบจุดปักหมุด "${name}" เรียบร้อยแล้ว`, '🗑️');
+            const idx = places.findIndex(p => p.id === id);
+            if (idx >= 0) places.splice(idx, 1);
+            await fetchDbPins();
+          } else {
+            showToast(data.error || 'ไม่สามารถลบจุดปักหมุดได้', '⚠️');
+          }
+        } catch (err) {
+          showToast('ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้', '⚠️');
+        }
+      } else {
+        const idx = places.findIndex(p => p.id === id);
+        if (idx >= 0) places.splice(idx, 1);
+        showToast(`ลบสถานที่ "${name}" เรียบร้อยแล้ว`, '🗑️');
+        render();
+      }
+    });
+
+    // Emoji reaction submit
+    async function sendEmojiReaction(id, emoji) {
+      if (id.startsWith('db_')) {
+        const dbId = id.replace('db_', '');
+        try {
+          const res = await fetch(`/api/pins/${dbId}/like/`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ emoji })
+          });
+          const data = await res.json();
+          if (data.success) {
+            likeCounts[id] = data.likes_count;
+            likedByMe[id] = data.is_liked;
+            showToast(`ส่งปฏิกิริยา ${emoji} สำเร็จ!`, '✨');
+            render();
+          }
+        } catch (e) {}
+      } else {
+        toggleLike(id);
+        showToast(`ส่งปฏิกิริยา ${emoji} ให้สถานที่แล้ว!`, '✨');
+      }
+    }
+
+    // Share action
+    function handleShare(id, title, url) {
+      const shareUrl = url || window.location.href;
+      if (navigator.share) {
+        navigator.share({
+          title: `TripGo - ${title}`,
+          text: `แนะนำสถานที่น่าเที่ยว: ${title}`,
+          url: shareUrl
+        }).then(() => showToast('แชร์สถานที่เรียบร้อยแล้ว!', '🚀'))
+          .catch(() => {});
+      } else {
+        navigator.clipboard.writeText(shareUrl).then(() => {
+          showToast(`คัดลอกลิงก์สถานที่ "${title}" ลง Clipboard แล้ว! 🔗`, '📋');
+        }).catch(() => {
+          showToast('ไม่สามารถคัดลอกลิงก์ได้', '⚠️');
+        });
+      }
+    }
+
     // event delegation
     document.addEventListener('click', (e) => {
       if (e.target.closest('[data-close-place]')) return closePlaceHistory();
+      const deleteBtn = e.target.closest('[data-delete-pin]');
+      if (deleteBtn) return openDeleteConfirmModal(deleteBtn.dataset.deletePin);
+      const emojiBtn = e.target.closest('[data-emoji]');
+      if (emojiBtn) return sendEmojiReaction(emojiBtn.dataset.id, emojiBtn.dataset.emoji);
+      const shareBtn = e.target.closest('[data-share]');
+      if (shareBtn) return handleShare(shareBtn.dataset.share, shareBtn.dataset.title, shareBtn.dataset.url);
       const likeBtn = e.target.closest('[data-like]');
       if (likeBtn) return toggleLike(likeBtn.dataset.like);
       const checkinBtn = e.target.closest('[data-checkin]');
@@ -2147,10 +3159,11 @@
       if (commentsBtn) return toggleComments(commentsBtn.dataset.toggleComments);
       const sendBtn = e.target.closest('[data-send]');
       if (sendBtn) return submitComment(sendBtn.dataset.send);
-      if (e.target.closest('input, textarea, a, button')) return;
+      if (e.target.closest('input, textarea, select, a, button, .custom-modal')) return;
       const post = e.target.closest('[data-place]');
       if (post) openPlaceHistory(post.dataset.place);
     });
+    
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && document.getElementById('placeModal').classList.contains('open')) {
         closePlaceHistory();
@@ -2182,10 +3195,11 @@
     document.getElementById('statProvinceRow').addEventListener('click', openVisitedProvinces);
 
     async function init() {
+      await fetchMe();
       checkins = await loadJSON(KEYS.checkins, false, {});
       likedByMe = await loadJSON(KEYS.likedByMe, false, {});
       const savedName = await loadJSON(KEYS.profileName, false, '');
-      profileName = typeof savedName === 'string' ? savedName : '';
+      if (!profileName) profileName = typeof savedName === 'string' ? savedName : '';
 
       await Promise.all(places.map(async p => {
         const count = await loadJSON(`place_likes:${p.id}`, true, 0);
@@ -2196,6 +3210,7 @@
 
       buildSideMenus();
       updateNavIdentity();
+      await fetchDbPins();
       render();
     }
 
