@@ -2356,13 +2356,54 @@
       send: '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>',
     };
 
-    const KEYS = { checkins: 'checkins', likedByMe: 'liked_by_me', profileName: 'profile_name' };
+    // Window Storage Polyfill for standard browser localStorage
+    if (!window.storage) {
+      window.storage = {
+        async get(key, shared) {
+          try {
+            const val = localStorage.getItem(key);
+            return val !== null ? { value: val } : null;
+          } catch (e) { return null; }
+        },
+        async set(key, value, shared) {
+          try {
+            localStorage.setItem(key, value);
+          } catch (e) { console.error('Storage write error', key, e); }
+        },
+        async remove(key, shared) {
+          try { localStorage.removeItem(key); } catch (e) {}
+        }
+      };
+    }
+
+    const KEYS = {
+      checkins: 'checkins',
+      likedByMe: 'liked_by_me',
+      profileName: 'profile_name',
+      localPins: 'tripgo_local_pins'
+    };
     let checkins = {};       // personal
     let likedByMe = {};      // personal
     let profileName = '';    // personal
     let likeCounts = {};     // shared, per place id -> number
     let comments = {};       // shared, per place id -> array
     let openComments = {};   // ui-only
+
+    async function saveLocalPins() {
+      const locals = places.filter(p => !p.is_db);
+      await saveJSON(KEYS.localPins, locals, false);
+    }
+
+    async function loadLocalPins() {
+      const locals = await loadJSON(KEYS.localPins, false, []);
+      if (Array.isArray(locals)) {
+        locals.forEach(lp => {
+          const idx = places.findIndex(p => p.id === lp.id);
+          if (idx >= 0) places[idx] = lp;
+          else places.unshift(lp);
+        });
+      }
+    }
 
     let activeStatus = 'all';
     let searchTerm = '';
@@ -2630,12 +2671,12 @@
     document.getElementById('navProfile').addEventListener('click', () => {
       if (currentUser) {
         if (confirm(`คุณเข้าสู่ระบบในชื่อ "${currentUser.display_name}" ต้องการออกจากระบบหรือไม่?`)) {
-          fetch('/api/logout/', { method: 'POST' }).then(() => {
+          fetch('/api/logout/', { method: 'POST' }).then(async () => {
             currentUser = null;
             profileName = '';
             showToast('ออกจากระบบเรียบร้อยแล้ว', '👋');
             updateNavIdentity();
-            render();
+            await fetchDbPins();
           });
         }
       } else {
@@ -2695,7 +2736,7 @@
           showToast(`ยินดีต้อนรับคุณ ${profileName}! 🎉`, '🔑');
           authModal.classList.remove('open');
           updateNavIdentity();
-          render();
+          await fetchDbPins();
         } else {
           authError.textContent = data.error || 'การเข้าสู่ระบบล้มเหลว';
           authError.style.display = 'block';
@@ -2726,7 +2767,7 @@
           showToast(`สมัครสมาชิกและเข้าสู่ระบบสำเร็จ! 🎉`, '✨');
           authModal.classList.remove('open');
           updateNavIdentity();
-          render();
+          await fetchDbPins();
         } else {
           authError.textContent = data.error || 'การลงทะเบียนล้มเหลว';
           authError.style.display = 'block';
@@ -2842,6 +2883,7 @@
       };
 
       places.unshift(localPin);
+      await saveLocalPins();
       showToast('ปักหมุดสถานที่ใหม่สำเร็จเรียบร้อย! 🎉', '📍');
       addPinModal.classList.remove('open');
       document.getElementById('createPinForm').reset();
@@ -2852,38 +2894,52 @@
     async function fetchDbPins() {
       try {
         const res = await fetch('/api/pins/');
-        const data = await res.json();
-        if (data.pins) {
-          dbPins = data.pins;
-          // Merge dbPins into places array cleanly
-          dbPins.forEach(dbPin => {
-            const idx = places.findIndex(p => p.id === dbPin.id || p.id === 'db_' + dbPin.db_id);
-            const formatted = {
-              id: 'db_' + dbPin.db_id,
-              db_id: dbPin.db_id,
-              name: dbPin.name,
-              province: dbPin.province,
-              category: dbPin.category,
-              desc: dbPin.desc,
-              latitude: dbPin.latitude,
-              longitude: dbPin.longitude,
-              image: dbPin.image,
-              recommended_tags: dbPin.recommended_tags,
-              is_db: true
-            };
-            if (idx >= 0) places[idx] = formatted;
-            else places.unshift(formatted);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.pins) {
+            dbPins = data.pins;
+            // Merge dbPins into places array cleanly
+            dbPins.forEach(dbPin => {
+              const idx = places.findIndex(p => p.id === dbPin.id || p.id === 'db_' + dbPin.db_id);
+              const formatted = {
+                id: 'db_' + dbPin.db_id,
+                db_id: dbPin.db_id,
+                name: dbPin.name,
+                province: dbPin.province,
+                district: dbPin.district || '',
+                village: dbPin.village || '',
+                category: dbPin.category,
+                desc: dbPin.desc,
+                latitude: dbPin.latitude,
+                longitude: dbPin.longitude,
+                image: dbPin.image,
+                recommended_tags: dbPin.recommended_tags,
+                created_by: dbPin.created_by,
+                creator_username: dbPin.creator_username,
+                creator_avatar: dbPin.creator_avatar,
+                creator_id: dbPin.creator_id,
+                created_at: dbPin.created_at,
+                is_db: true
+              };
+              if (idx >= 0) places[idx] = formatted;
+              else places.unshift(formatted);
 
-            likeCounts['db_' + dbPin.db_id] = dbPin.likes;
-            comments['db_' + dbPin.db_id] = dbPin.comments;
-            if (dbPin.is_liked) likedByMe['db_' + dbPin.db_id] = true;
-            if (dbPin.is_checked) checkins['db_' + dbPin.db_id] = dbPin.created_at;
-          });
-          render();
+              likeCounts['db_' + dbPin.db_id] = dbPin.likes;
+              comments['db_' + dbPin.db_id] = dbPin.comments;
+              
+              if (dbPin.is_liked) likedByMe['db_' + dbPin.db_id] = true;
+              else delete likedByMe['db_' + dbPin.db_id];
+
+              if (dbPin.is_checked) checkins['db_' + dbPin.db_id] = dbPin.created_at || new Date().toISOString();
+              else delete checkins['db_' + dbPin.db_id];
+            });
+          }
         }
       } catch (e) {
-        console.error('Error fetching DB pins:', e);
+        console.warn('Error fetching DB pins:', e);
       }
+      await loadLocalPins();
+      render();
     }
 
     function renderPost(p) {
@@ -3273,11 +3329,13 @@
       const savedName = await loadJSON(KEYS.profileName, false, '');
       if (!profileName) profileName = typeof savedName === 'string' ? savedName : '';
 
+      await loadLocalPins();
+
       await Promise.all(places.map(async p => {
         const count = await loadJSON(`place_likes:${p.id}`, true, 0);
-        likeCounts[p.id] = typeof count === 'number' ? count : 0;
+        if (!likeCounts[p.id]) likeCounts[p.id] = typeof count === 'number' ? count : 0;
         const cs = await loadJSON(`place_comments:${p.id}`, true, []);
-        comments[p.id] = Array.isArray(cs) ? cs : [];
+        if (!comments[p.id] || comments[p.id].length === 0) comments[p.id] = Array.isArray(cs) ? cs : [];
       }));
 
       buildSideMenus();
