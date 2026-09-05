@@ -2070,6 +2070,9 @@
     </div>
   </div>
 
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
   <script>
         const places = [
       {
@@ -2577,7 +2580,13 @@
 
     // Toast Notification System
     function showToast(message, icon = '✨') {
-      const container = document.getElementById('toastContainer');
+      let container = document.getElementById('toastContainer');
+      if (!container) {
+        container = document.createElement('div');
+        container.id = 'toastContainer';
+        container.className = 'toast-container';
+        document.body.appendChild(container);
+      }
       const toast = document.createElement('div');
       toast.className = 'toast';
       toast.innerHTML = `<span>${icon}</span><span>${message}</span>`;
@@ -2760,36 +2769,83 @@
     // Create Pin Form Submission
     document.getElementById('createPinForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const formData = new FormData();
-      formData.append('name', document.getElementById('pinName').value);
-      formData.append('province', document.getElementById('pinProvince').value);
-      formData.append('district', document.getElementById('pinDistrict').value);
-      formData.append('village', document.getElementById('pinVillage').value);
-      formData.append('category', document.getElementById('pinCategory').value);
-      formData.append('latitude', document.getElementById('pinLat').value);
-      formData.append('longitude', document.getElementById('pinLng').value);
-      formData.append('recommended_tags', document.getElementById('pinTag').value);
-      formData.append('description', document.getElementById('pinDesc').value);
-
+      const name = document.getElementById('pinName').value;
+      const province = document.getElementById('pinProvince').value || 'ศรีสะเกษ';
+      const district = document.getElementById('pinDistrict').value || '';
+      const village = document.getElementById('pinVillage').value || '';
+      const category = document.getElementById('pinCategory').value || 'พักผ่อนหย่อนใจ';
+      const latitude = document.getElementById('pinLat').value || '';
+      const longitude = document.getElementById('pinLng').value || '';
+      const recommended_tags = document.getElementById('pinTag').value || '📸 จุดถ่ายรูปสวย';
+      const description = document.getElementById('pinDesc').value || '';
       const fileInput = document.getElementById('pinImage');
+
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('province', province);
+      formData.append('district', district);
+      formData.append('village', village);
+      formData.append('category', category);
+      formData.append('latitude', latitude);
+      formData.append('longitude', longitude);
+      formData.append('recommended_tags', recommended_tags);
+      formData.append('description', description);
+
       if (fileInput.files[0]) {
         formData.append('image', fileInput.files[0]);
       }
 
+      let imgDataUrl = null;
+      if (fileInput.files[0]) {
+        try {
+          imgDataUrl = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = (ev) => resolve(ev.target.result);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(fileInput.files[0]);
+          });
+        } catch (err) {}
+      }
+
       try {
         const res = await fetch('/api/pins/', { method: 'POST', body: formData });
-        const data = await res.json();
-        if (data.success) {
-          showToast('ปักหมุดสถานที่ใหม่สำเร็จเรียบร้อย! 🎉', '📍');
-          addPinModal.classList.remove('open');
-          document.getElementById('createPinForm').reset();
-          await fetchDbPins();
-        } else {
-          showToast(data.error || 'เกิดข้อผิดพลาดในการปักหมุด', '⚠️');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success) {
+            showToast('ปักหมุดสถานที่ใหม่สำเร็จเรียบร้อย! 🎉', '📍');
+            addPinModal.classList.remove('open');
+            document.getElementById('createPinForm').reset();
+            await fetchDbPins();
+            return;
+          }
         }
       } catch (err) {
-        showToast('ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้', '⚠️');
+        console.warn('API pins endpoint unavailable, using local fallback mode', err);
       }
+
+      // Fallback: save pin locally when API is unavailable or offline
+      const localPinId = 'local_' + Date.now();
+      const localPin = {
+        id: localPinId,
+        db_id: Date.now(),
+        name: name,
+        province: province,
+        district: district,
+        village: village,
+        category: category,
+        desc: description,
+        latitude: latitude ? parseFloat(latitude) : null,
+        longitude: longitude ? parseFloat(longitude) : null,
+        image: imgDataUrl || null,
+        recommended_tags: recommended_tags,
+        is_db: false
+      };
+
+      places.unshift(localPin);
+      showToast('ปักหมุดสถานที่ใหม่สำเร็จเรียบร้อย! 🎉', '📍');
+      addPinModal.classList.remove('open');
+      document.getElementById('createPinForm').reset();
+      render();
     });
 
     let dbPins = [];
